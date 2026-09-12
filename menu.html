@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geetha Vilas Menu – Pure Veg Restaurant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark:  #1a5c2a;
+      --green-mid:   #2e7d3f;
+      --green-light: #e8f5e9;
+      --gold:        #c9a227;
+      --gold-light:  #f5e6b2;
+      --cream:       #fffdf5;
+      --text-dark:   #1a1a1a;
+      --text-mid:    #444;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 32px 20px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .header-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .header-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 8vw, 56px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .header-tel {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(13px, 3vw, 17px);
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    .header-tag {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--gold);
+      color: var(--green-dark);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 3px;
+      padding: 5px 18px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .header-sub {
+      margin-top: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 1px;
+    }
+    .header-info {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+    }
+    .header-info span { display: flex; align-items: center; gap: 5px; }
+
+    /* ── STICKY NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--green-dark);
+      border-bottom: 3px solid var(--gold);
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+    nav ul {
+      display: inline-flex;
+      list-style: none;
+      padding: 0 12px;
+    }
+    nav ul li a {
+      display: block;
+      padding: 13px 16px;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color .2s, border-bottom .2s;
+      border-bottom: 3px solid transparent;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
+
+    /* ── SECTION ── */
+    .menu-section { margin-bottom: 40px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .section-icon { font-size: 24px; }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 4vw, 26px);
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+    .section-sub {
+      font-size: 11px;
+      color: var(--text-mid);
+      margin-top: 1px;
+    }
+
+    /* ── TIMING BADGE ── */
+    .timing-badge {
+      display: inline-block;
+      background: var(--gold-light);
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--gold);
+      margin-left: auto;
+    }
+
+    /* ── GRID ── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+    }
+
+    /* ── ITEM CARD ── */
+    .item-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #e8ede8;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .item-card:hover {
+      box-shadow: 0 4px 16px rgba(30,90,50,0.12);
+      transform: translateY(-2px);
+    }
+    .item-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+    .veg-dot {
+      width: 14px; height: 14px; min-width: 14px;
+      border-radius: 2px;
+      border: 1.5px solid var(--green-mid);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .veg-dot::after {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green-mid);
+      display: block;
+    }
+    .item-name {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+    .item-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green-dark);
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+    .item-price::before { content: '₹'; font-size: 11px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 13px;
+    }
+    footer .footer-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── SCROLL TO TOP ── */
+    #scrollTop {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      background: var(--green-dark);
+      color: var(--gold);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      z-index: 200;
+    }
+    #scrollTop:hover { background: var(--gold); color: var(--green-dark); }
+    #scrollTop.show { display: flex; }
+
+    @media (max-width: 480px) {
+      .items-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-logo">గీతా విలాస్ &nbsp;•&nbsp; Since ...</div>
+  <div class="header-name">Geetha Vilas</div>
+  <div class="header-tel">Pure Veg Restaurant</div>
+  <div class="header-tag">🌿 100% Pure Vegetarian</div>
+  <div class="header-sub">Good Food &bull; Good Mood &bull; Taste that makes you come back</div>
+  <div class="header-info">
+    <span>📍 Sai Nagar (Shar Road), Near HDFC Bank, Sullurpeta – 524121</span>
+    <span>🕐 6:00 AM – 11:00 PM</span>
+    <span>📞 9553556099 &nbsp;|&nbsp; 9908794579</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <ul>
+    <li><a href="#breakfast">🌅 Breakfast</a></li>
+    <li><a href="#dosas">🥞 Dosas</a></li>
+    <li><a href="#tiffins">🫓 Tiffins</a></li>
+    <li><a href="#starters">🍢 Starters</a></li>
+    <li><a href="#rice-noodles">🍚 Rice & Noodles</a></li>
+    <li><a href="#lunch">🍽️ Lunch</a></li>
+    <li><a href="#milkshakes">🥤 Milk Shakes</a></li>
+    <li><a href="#mojitos">🍹 Mojitos</a></li>
+    <li><a href="#juices">🍊 Fresh Juices</a></li>
+    <li><a href="#falooda">🍨 Falooda</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- ── BREAKFAST ── -->
+  <section class="menu-section" id="breakfast">
+    <div class="section-header">
+      <span class="section-icon">🌅</span>
+      <div>
+        <div class="section-title">Breakfast</div>
+        <div class="section-sub">Fresh every morning</div>
+      </div>
+      <span class="timing-badge">6 AM – 11 PM</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Idly (2 pcs)</span></div><span class="item-price">30</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Sambar Idly</span></div><span class="item-price">50</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Single Idly</span></div><span class="item-price">15</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Fry Idly</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Vada</span></div><span class="item-price">15</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Sambar Vada</span></div><span class="item-price">50</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Ghee Pongal</span></div><span class="item-price">55</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pesarattu</span></div><span class="item-price">50</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Onion Pesarattu</span></div><span class="item-price">65</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Poori (2 pcs)</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Chola Poori</span></div><span class="item-price">65</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Uthappam</span></div><span class="item-price">70</span></div>
+    </div>
+  </section>
+
+  <!-- ── DOSAS ── -->
+  <section class="menu-section" id="dosas">
+    <div class="section-header">
+      <span class="section-icon">🥞</span>
+      <div>
+        <div class="section-title">Dosas</div>
+        <div class="section-sub">Crispy & golden</div>
+      </div>
+      <span class="timing-badge">3 PM – 11 PM</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Plain Dosa</span></div><span class="item-price">40</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Masala Dosa</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Onion Dosa</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Ghee Dosa</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Ghee Karam Dosa</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Rava Dosa</span></div><span class="item-price">55</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Rava Onion Dosa</span></div><span class="item-price">75</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Set Dosa</span></div><span class="item-price">55</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Dosa</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom Dosa</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Dosa</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Chinese Parota</span></div><span class="item-price">70</span></div>
+    </div>
+  </section>
+
+  <!-- ── TIFFINS ── -->
+  <section class="menu-section" id="tiffins">
+    <div class="section-header">
+      <span class="section-icon">🫓</span>
+      <div>
+        <div class="section-title">Chapathi, Parota & Tiffins</div>
+        <div class="section-sub">Soft & freshly made</div>
+      </div>
+      <span class="timing-badge">3 PM – 11 PM</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Chapathi</span></div><span class="item-price">55</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Parota</span></div><span class="item-price">55</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Fry Parota</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Fry Chapathi</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Chapathi</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom Chapathi</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Chapathi</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Parota</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom Parota</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Parota</span></div><span class="item-price">100</span></div>
+    </div>
+  </section>
+
+  <!-- ── STARTERS ── -->
+  <section class="menu-section" id="starters">
+    <div class="section-header">
+      <span class="section-icon">🍢</span>
+      <div>
+        <div class="section-title">Starters & Chinese</div>
+        <div class="section-sub">Crispy bites & tangy flavours</div>
+      </div>
+      <span class="timing-badge">3 PM – 11 PM</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Manchuria</span></div><span class="item-price">115</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom Manchuria</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Manchuria</span></div><span class="item-price">140</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi 65</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer 65</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom 65</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Chilli</span></div><span class="item-price">135</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom Chilli</span></div><span class="item-price">120</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Chilli</span></div><span class="item-price">135</span></div>
+    </div>
+  </section>
+
+  <!-- ── RICE & NOODLES ── -->
+  <section class="menu-section" id="rice-noodles">
+    <div class="section-header">
+      <span class="section-icon">🍚</span>
+      <div>
+        <div class="section-title">Fried Rice & Noodles</div>
+        <div class="section-sub">Wok-tossed goodness</div>
+      </div>
+      <span class="timing-badge">3 PM – 11 PM</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Veg Fried Rice</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Fried Rice</span></div><span class="item-price">125</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Fried Rice</span></div><span class="item-price">135</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mushroom Fried Rice</span></div><span class="item-price">140</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Kaju Fried Rice</span></div><span class="item-price">140</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Jeera Rice</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Veg Noodles</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Gobi Noodles</span></div><span class="item-price">105</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Paneer Noodles</span></div><span class="item-price">125</span></div>
+    </div>
+  </section>
+
+  <!-- ── LUNCH ── -->
+  <section class="menu-section" id="lunch">
+    <div class="section-header">
+      <span class="section-icon">🍽️</span>
+      <div>
+        <div class="section-title">Lunch</div>
+        <div class="section-sub">Homestyle meals & parcels</div>
+      </div>
+      <span class="timing-badge">Lunch Hours</span>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mini Meals (Line)</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Full Meals Parcel</span></div><span class="item-price">150</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Veg Biryani / Parcel</span></div><span class="item-price">75</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Tomato Rice / Parcel</span></div><span class="item-price">65</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Curd Rice / Parcel</span></div><span class="item-price">65</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Extra Rice</span></div><span class="item-price">30</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Sambar Parcel</span></div><span class="item-price">30</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Rasam Parcel</span></div><span class="item-price">30</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pappu Parcel</span></div><span class="item-price">30</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Thalimpu Parcel</span></div><span class="item-price">25</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Water Bottle 500ml</span></div><span class="item-price">10</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Water Bottle 1L</span></div><span class="item-price">20</span></div>
+    </div>
+  </section>
+
+  <!-- ── MILK SHAKES ── -->
+  <section class="menu-section" id="milkshakes">
+    <div class="section-header">
+      <span class="section-icon">🥤</span>
+      <div>
+        <div class="section-title">Milk Shakes</div>
+        <div class="section-sub">Thick, creamy & chilled</div>
+      </div>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Chocolate Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Vanilla Milk Shake</span></div><span class="item-price">80</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Strawberry Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mango Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pista Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Butter Scotch Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Black Currant Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Oreo Milk Shake</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Kitkat Milk Shake</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Dairy Milk Shake</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Five Star Milk Shake</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Dry Fruit Milk Shake</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Apple Shake</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Sapota Shake</span></div><span class="item-price">90</span></div>
+    </div>
+  </section>
+
+  <!-- ── MOJITOS ── -->
+  <section class="menu-section" id="mojitos">
+    <div class="section-header">
+      <span class="section-icon">🍹</span>
+      <div>
+        <div class="section-title">Mojitos</div>
+        <div class="section-sub">Refreshing & bubbly</div>
+      </div>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Lemon Mint Mojito</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Green Apple Mojito</span></div><span class="item-price">95</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Water Melon Mojito</span></div><span class="item-price">95</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pomegranate Mojito</span></div><span class="item-price">95</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Blue Curacao Mojito</span></div><span class="item-price">90</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Blueberry Mojito</span></div><span class="item-price">90</span></div>
+    </div>
+  </section>
+
+  <!-- ── FRESH JUICES ── -->
+  <section class="menu-section" id="juices">
+    <div class="section-header">
+      <span class="section-icon">🍊</span>
+      <div>
+        <div class="section-title">Fresh Juices</div>
+        <div class="section-sub">100% fresh & natural</div>
+      </div>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Apple Juice</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Orange Juice</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mango Juice</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Dragon Fruit Juice</span></div><span class="item-price">80</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Red Banana Juice</span></div><span class="item-price">70</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Water Melon Juice</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pine Apple Juice</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Grapes Juice</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Sapota Juice</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Papaya Juice</span></div><span class="item-price">65</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Strawberry Juice</span></div><span class="item-price">85</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Kiwi Juice</span></div><span class="item-price">95</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pomegranate Juice</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Muskmelon Juice</span></div><span class="item-price">60</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Dry Fruit Juice</span></div><span class="item-price">110</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Avocado Juice</span></div><span class="item-price">100</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Lemon Soda (Sweet/Salt)</span></div><span class="item-price">45</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mineral Water 500ml</span></div><span class="item-price">10</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mineral Water 1L</span></div><span class="item-price">20</span></div>
+    </div>
+  </section>
+
+  <!-- ── FALOODA ── -->
+  <section class="menu-section" id="falooda">
+    <div class="section-header">
+      <span class="section-icon">🍨</span>
+      <div>
+        <div class="section-title">Falooda & Fruit Salad</div>
+        <div class="section-sub">Indulgent dessert drinks</div>
+      </div>
+    </div>
+    <div class="items-grid">
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Chocolate Falooda</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Vanilla Falooda</span></div><span class="item-price">120</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Mango Falooda</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Pista Falooda</span></div><span class="item-price">140</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Butter Scotch Falooda</span></div><span class="item-price">140</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Black Currant Falooda</span></div><span class="item-price">140</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Fruit Falooda with Nuts</span></div><span class="item-price">160</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Strawberry Falooda</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Royal Falooda</span></div><span class="item-price">130</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Fruit Falooda</span></div><span class="item-price">120</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Dry Fruit Falooda</span></div><span class="item-price">190</span></div>
+      <div class="item-card"><div class="item-left"><div class="veg-dot"></div><span class="item-name">Fruit Salad</span></div><span class="item-price">70</span></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-tagline">"Taste that makes you come back"</div>
+  <p>📍 Sai Nagar (Shar Road), Near HDFC Bank, Thirupathi District, Sullurpeta – 524121</p>
+  <p style="margin-top:6px;">📞 <a href="tel:9553556099">9553556099</a> &nbsp;|&nbsp; <a href="tel:9908794579">9908794579</a></p>
+  <p style="margin-top:6px;">🕐 6:00 AM – 11:00 PM &nbsp;|&nbsp; 🌿 100% Pure Vegetarian</p>
+  <p style="margin-top:6px; font-size:11px; opacity:.6;">Catering services available for special occasions</p>
+</footer>
+
+<button id="scrollTop" title="Back to top">↑</button>
+
+<script>
+  // ── Scroll-to-top ──
+  const btn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 300));
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // ── Active nav highlight ──
+  const sections = document.querySelectorAll('.menu-section');
+  const navLinks = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // ── Smooth scroll for nav links ──
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
