@@ -78,6 +78,30 @@
     #loadingOverlay { position:fixed; inset:0; background:rgba(255,255,255,0.92); display:none; flex-direction:column; align-items:center; justify-content:center; z-index:999; gap:16px; }
     .spinner { width:40px; height:40px; border:4px solid #e0e8e0; border-top-color:var(--green); border-radius:50%; animation:spin .8s linear infinite; }
     @keyframes spin { to{transform:rotate(360deg)} }
+
+    /* ── ADD ITEM BUTTON in section head ── */
+    .add-item-btn { font-size:11px; padding:4px 10px; border-radius:6px; background:var(--gold); color:#fff; border:none; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:600; margin-left:6px; }
+    .add-item-btn:hover { opacity:.85; }
+
+    /* ── ADD ITEM MODAL ── */
+    #addItemModal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:600; align-items:center; justify-content:center; padding:20px; }
+    #addItemModal.show { display:flex; }
+    .modal-box { background:#fff; border-radius:18px; padding:28px 26px; max-width:400px; width:100%; box-shadow:0 8px 40px rgba(0,0,0,0.2); }
+    .modal-box h3 { font-family:'Playfair Display',serif; color:var(--green); font-size:20px; margin-bottom:18px; }
+    .form-group { margin-bottom:14px; }
+    .form-group label { display:block; font-size:12px; font-weight:600; color:#555; margin-bottom:5px; }
+    .form-group input, .form-group select {
+      width:100%; padding:10px 14px; border-radius:9px; border:1.5px solid #ddd;
+      font-size:14px; font-family:'Poppins',sans-serif; outline:none; transition:border .2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color:var(--green); }
+    .modal-btn-row { display:flex; gap:10px; margin-top:18px; }
+    .modal-btn-row .btn { flex:1; padding:11px; }
+
+    /* ── DELETE BUTTON on item row ── */
+    .del-btn { background:none; border:none; cursor:pointer; color:#ffcdd2; font-size:16px; padding:0 4px; transition:color .2s; flex-shrink:0; }
+    .del-btn:hover { color:var(--red); }
+    .item-row-actions { display:flex; align-items:center; gap:8px; }
   </style>
 </head>
 <body>
@@ -111,6 +135,7 @@
       <div id="saveStatus"><div class="dot" id="statusDot"></div><span id="statusText">Saved</span></div>
       <div class="date-badge" id="todayDate"></div>
       <button id="saveBtn" class="btn btn-gold">💾 Save</button>
+      <button id="addItemBtn" class="btn btn-gold" style="background:#2e7d3f;">➕ Add Item</button>
       <button id="resetBtn" class="btn btn-outline">🔄 Reset All</button>
       <button id="logoutBtn" class="btn btn-outline" style="padding:8px 12px;">🚪</button>
     </div>
@@ -134,6 +159,29 @@
     <div class="confirm-row">
       <button id="confirmResetBtn" class="btn btn-red">Yes, Reset</button>
       <button id="cancelResetBtn" class="btn" style="background:#eee;color:#333;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD ITEM MODAL -->
+<div id="addItemModal">
+  <div class="modal-box">
+    <h3>➕ Add New Item</h3>
+    <div class="form-group">
+      <label>Category</label>
+      <select id="newItemCategory"></select>
+    </div>
+    <div class="form-group">
+      <label>Item Name</label>
+      <input type="text" id="newItemName" placeholder="e.g. Paneer Butter Masala" />
+    </div>
+    <div class="form-group">
+      <label>Price (₹)</label>
+      <input type="number" id="newItemPrice" placeholder="e.g. 120" min="1" />
+    </div>
+    <div class="modal-btn-row">
+      <button id="confirmAddBtn" class="btn btn-gold">Add Item</button>
+      <button id="cancelAddBtn" class="btn" style="background:#eee;color:#333;">Cancel</button>
     </div>
   </div>
 </div>
@@ -280,12 +328,17 @@
     document.getElementById('todayDate').textContent =
       now.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
 
-    db.ref('availability').once('value').then(function(snap) {
+    // Load custom items first, then availability
+    db.ref('customItems').once('value').then(function(snap) {
+      const customItems = snap.val();
+      if (customItems) loadCustomItems(Object.values(customItems).filter(Boolean));
+
+      return db.ref('availability').once('value');
+    }).then(function(snap) {
       const data = snap.val() || {};
       const today = now.toDateString();
       if (data.__date !== today) {
         availability = { __date: today };
-        // auto-reset for new day
         db.ref('availability').set(availability);
       } else {
         availability = data;
@@ -315,32 +368,56 @@
       const head = document.createElement('div');
       head.className = 'section-head';
       head.innerHTML = '<div class="section-head-left">' + section.icon + ' ' + section.title + '</div>';
+
+      const btnGroup = document.createElement('div');
+      btnGroup.style.cssText = 'display:flex;gap:6px;align-items:center;';
+
       const toggleBtn = document.createElement('button');
       toggleBtn.className = 'toggle-all-btn';
       toggleBtn.textContent = 'Toggle All';
       toggleBtn.addEventListener('click', function() { toggleSection(section.id); });
-      head.appendChild(toggleBtn);
+
+      const addBtn = document.createElement('button');
+      addBtn.className = 'add-item-btn';
+      addBtn.textContent = '+ Add';
+      addBtn.addEventListener('click', function() { openAddModal(section.id); });
+
+      btnGroup.appendChild(toggleBtn);
+      btnGroup.appendChild(addBtn);
+      head.appendChild(btnGroup);
       div.appendChild(head);
 
       const body = document.createElement('div');
+      body.id = 'body-' + section.id;
       section.items.forEach(function(item) {
-        const isAvail = availability[item.id] !== false;
-        const row = document.createElement('div');
-        row.className = 'item-row' + (isAvail ? '' : ' unavailable');
-        row.id = 'row-' + item.id;
-        row.innerHTML =
-          '<div class="item-info"><div class="name">' + item.name + '</div><div class="price">₹' + item.price + '</div></div>' +
-          '<label class="switch"><input type="checkbox" id="chk-' + item.id + '"' + (isAvail ? ' checked' : '') + '><span class="slider"></span></label>';
-        body.appendChild(row);
-
-        // attach change listener
-        row.querySelector('input').addEventListener('change', function() {
-          onToggle(item.id, this.checked);
-        });
+        body.appendChild(buildItemRow(item, section.id));
       });
       div.appendChild(body);
       container.appendChild(div);
     });
+  }
+
+  function buildItemRow(item, sectionId) {
+    const isAvail = availability[item.id] !== false;
+    const row = document.createElement('div');
+    row.className = 'item-row' + (isAvail ? '' : ' unavailable');
+    row.id = 'row-' + item.id;
+    row.innerHTML =
+      '<div class="item-info"><div class="name">' + item.name + '</div><div class="price">₹' + item.price + '</div></div>' +
+      '<div class="item-row-actions">' +
+        '<label class="switch"><input type="checkbox" id="chk-' + item.id + '"' + (isAvail ? ' checked' : '') + '><span class="slider"></span></label>' +
+        (item.custom ? '<button class="del-btn" title="Delete item">🗑</button>' : '') +
+      '</div>';
+
+    row.querySelector('input').addEventListener('change', function() {
+      onToggle(item.id, this.checked);
+    });
+    if (item.custom) {
+      row.querySelector('.del-btn').addEventListener('click', function() {
+        deleteItem(item.id, sectionId);
+      });
+    }
+    return row;
   }
 
   function onToggle(itemId, checked) {
@@ -424,6 +501,95 @@
     t.textContent = msg;
     t.className = isError ? 'error-toast show' : 'show';
     setTimeout(function() { t.className = ''; }, 3000);
+  }
+
+  // ── ADD ITEM MODAL ──
+  function openAddModal(sectionId) {
+    // populate category dropdown, pre-select given section
+    const sel = document.getElementById('newItemCategory');
+    sel.innerHTML = '';
+    MENU.forEach(function(s) {
+      const opt = document.createElement('option');
+      opt.value = s.id;
+      opt.textContent = s.icon + ' ' + s.title;
+      if (s.id === sectionId) opt.selected = true;
+      sel.appendChild(opt);
+    });
+    document.getElementById('newItemName').value = '';
+    document.getElementById('newItemPrice').value = '';
+    document.getElementById('addItemModal').classList.add('show');
+    document.getElementById('newItemName').focus();
+  }
+
+  document.getElementById('addItemBtn').addEventListener('click', function() { openAddModal(MENU[0].id); });
+  document.getElementById('cancelAddBtn').addEventListener('click', function() {
+    document.getElementById('addItemModal').classList.remove('show');
+  });
+
+  document.getElementById('confirmAddBtn').addEventListener('click', function() {
+    const categoryId = document.getElementById('newItemCategory').value;
+    const name  = document.getElementById('newItemName').value.trim();
+    const price = parseInt(document.getElementById('newItemPrice').value, 10);
+
+    if (!name) { alert('Please enter item name.'); return; }
+    if (!price || price < 1) { alert('Please enter a valid price.'); return; }
+
+    // generate unique id
+    const id = 'custom-' + Date.now();
+    const newItem = { id: id, name: name, price: price, custom: true };
+
+    // add to MENU array
+    const section = MENU.find(function(s) { return s.id === categoryId; });
+    section.items.push(newItem);
+
+    // save custom items to Firebase
+    saveCustomItems();
+
+    // add row to DOM instantly
+    const body = document.getElementById('body-' + categoryId);
+    if (body) body.appendChild(buildItemRow(newItem, categoryId));
+
+    updateStats();
+    document.getElementById('addItemModal').classList.remove('show');
+    showToast('✅ "' + name + '" added to ' + section.title);
+  });
+
+  // ── DELETE ITEM ──
+  function deleteItem(itemId, sectionId) {
+    if (!confirm('Delete this item permanently?')) return;
+    const section = MENU.find(function(s) { return s.id === sectionId; });
+    section.items = section.items.filter(function(i) { return i.id !== itemId; });
+    delete availability[itemId];
+
+    // remove from DOM
+    const row = document.getElementById('row-' + itemId);
+    if (row) row.remove();
+
+    saveCustomItems();
+    saveToFirebase();
+    updateStats();
+    showToast('🗑 Item deleted.');
+  }
+
+  // ── SAVE / LOAD CUSTOM ITEMS ──
+  function saveCustomItems() {
+    var allCustom = [];
+    MENU.forEach(function(s) {
+      s.items.forEach(function(item) {
+        if (item.custom) allCustom.push({ sectionId: s.id, id: item.id, name: item.name, price: item.price });
+      });
+    });
+    db.ref('customItems').set(allCustom.length ? allCustom : null);
+  }
+
+  function loadCustomItems(customItems) {
+    if (!customItems || !customItems.length) return;
+    customItems.forEach(function(ci) {
+      const section = MENU.find(function(s) { return s.id === ci.sectionId; });
+      if (section && !section.items.find(function(i) { return i.id === ci.id; })) {
+        section.items.push({ id: ci.id, name: ci.name, price: ci.price, custom: true });
+      }
+    });
   }
 
   // ── MIDNIGHT RESET ──

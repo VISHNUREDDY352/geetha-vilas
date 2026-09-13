@@ -313,11 +313,24 @@
   const bar = document.getElementById('loadingBar');
   bar.style.width = '40%';
 
-  db.ref('availability').on('value', function(snapshot) {
-    bar.style.width = '100%';
-    setTimeout(function() { bar.style.width = '0%'; }, 400);
-    const data = snapshot.val() || {};
-    renderMenu(data);
+  // Load custom items once, then listen to availability in real-time
+  db.ref('customItems').once('value').then(function(snap) {
+    const customItems = snap.val();
+    if (customItems) {
+      Object.values(customItems).filter(Boolean).forEach(function(ci) {
+        var section = MENU.find(function(s) { return s.id === ci.sectionId; });
+        if (section && !section.items.find(function(i) { return i.id === ci.id; })) {
+          section.items.push({ id: ci.id, name: ci.name, price: ci.price });
+        }
+      });
+    }
+
+    db.ref('availability').on('value', function(snapshot) {
+      bar.style.width = '100%';
+      setTimeout(function() { bar.style.width = '0%'; }, 400);
+      var data = snapshot.val() || {};
+      renderMenu(data);
+    });
   });
 
   // ── NAV ──
