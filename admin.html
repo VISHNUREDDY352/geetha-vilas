@@ -101,7 +101,21 @@
     /* ── DELETE BUTTON on item row ── */
     .del-btn { background:none; border:none; cursor:pointer; color:#ffcdd2; font-size:16px; padding:0 4px; transition:color .2s; flex-shrink:0; }
     .del-btn:hover { color:var(--red); }
+    .edit-btn { background:none; border:none; cursor:pointer; color:#b0bec5; font-size:15px; padding:0 4px; transition:color .2s; flex-shrink:0; }
+    .edit-btn:hover { color:var(--gold); }
     .item-row-actions { display:flex; align-items:center; gap:8px; }
+
+    /* ── INLINE PRICE EDIT ── */
+    .price-edit-wrap { display:flex; align-items:center; gap:4px; margin-top:2px; }
+    .price-input {
+      width:70px; padding:3px 8px; border-radius:6px; border:1.5px solid var(--gold);
+      font-size:13px; font-family:'Poppins',sans-serif; font-weight:600; color:var(--green);
+      outline:none;
+    }
+    .price-save-btn {
+      background:var(--green); color:#fff; border:none; border-radius:6px;
+      font-size:11px; padding:3px 8px; cursor:pointer; font-family:'Poppins',sans-serif;
+    }
   </style>
 </head>
 <body>
@@ -333,6 +347,10 @@
       const customItems = snap.val();
       if (customItems) loadCustomItems(Object.values(customItems).filter(Boolean));
 
+      return db.ref('priceOverrides').once('value');
+    }).then(function(snap) {
+      applyPriceOverrides(snap.val());
+
       return db.ref('removedItems').once('value');
     }).then(function(snap) {
       // filter out permanently removed original items
@@ -414,19 +432,67 @@
     const row = document.createElement('div');
     row.className = 'item-row' + (isAvail ? '' : ' unavailable');
     row.id = 'row-' + item.id;
-    row.innerHTML =
-      '<div class="item-info"><div class="name">' + item.name + '</div><div class="price">₹' + item.price + '</div></div>' +
-      '<div class="item-row-actions">' +
-        '<label class="switch"><input type="checkbox" id="chk-' + item.id + '"' + (isAvail ? ' checked' : '') + '><span class="slider"></span></label>' +
-        '<button class="del-btn" title="Remove item">🗑</button>' +
-      '</div>';
 
-    row.querySelector('input').addEventListener('change', function() {
+    const info = document.createElement('div');
+    info.className = 'item-info';
+    info.innerHTML = '<div class="name">' + item.name + '</div>';
+
+    // price display + inline edit
+    const priceWrap = document.createElement('div');
+    priceWrap.className = 'price-edit-wrap';
+    priceWrap.id = 'price-wrap-' + item.id;
+    priceWrap.innerHTML = '<span class="price" id="price-display-' + item.id + '">₹' + item.price + '</span>';
+    info.appendChild(priceWrap);
+    row.appendChild(info);
+
+    const actions = document.createElement('div');
+    actions.className = 'item-row-actions';
+    actions.innerHTML =
+      '<button class="edit-btn" title="Edit price">✏️</button>' +
+      '<label class="switch"><input type="checkbox" id="chk-' + item.id + '"' + (isAvail ? ' checked' : '') + '><span class="slider"></span></label>' +
+      '<button class="del-btn" title="Remove item">🗑</button>';
+    row.appendChild(actions);
+
+    // toggle
+    actions.querySelector('input').addEventListener('change', function() {
       onToggle(item.id, this.checked);
     });
-    row.querySelector('.del-btn').addEventListener('click', function() {
+
+    // delete
+    actions.querySelector('.del-btn').addEventListener('click', function() {
       deleteItem(item.id, sectionId, item.custom);
     });
+
+    // edit price
+    actions.querySelector('.edit-btn').addEventListener('click', function() {
+      const wrap = document.getElementById('price-wrap-' + item.id);
+      // if already editing, ignore
+      if (wrap.querySelector('.price-input')) return;
+      wrap.innerHTML =
+        '<input class="price-input" type="number" id="price-input-' + item.id + '" value="' + item.price + '" min="1" />' +
+        '<button class="price-save-btn" id="price-save-' + item.id + '">✓</button>';
+      wrap.querySelector('.price-input').focus();
+
+      function savePrice() {
+        const newPrice = parseInt(wrap.querySelector('.price-input').value, 10);
+        if (!newPrice || newPrice < 1) { alert('Enter a valid price.'); return; }
+        item.price = newPrice;
+        wrap.innerHTML = '<span class="price" id="price-display-' + item.id + '">₹' + newPrice + '</span>';
+        // save to Firebase
+        saveCustomItems();
+        savePriceOverride(item.id, newPrice);
+        showToast('✅ Price updated to ₹' + newPrice);
+      }
+
+      wrap.querySelector('.price-save-btn').addEventListener('click', savePrice);
+      wrap.querySelector('.price-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') savePrice();
+        if (e.key === 'Escape') {
+          wrap.innerHTML = '<span class="price" id="price-display-' + item.id + '">₹' + item.price + '</span>';
+        }
+      });
+    });
+
     return row;
   }
 
@@ -586,6 +652,22 @@
     saveToFirebase();
     updateStats();
     showToast('🗑 Item removed from menu.');
+  }
+
+  // ── PRICE OVERRIDES ──
+  function savePriceOverride(itemId, price) {
+    db.ref('priceOverrides/' + itemId).set(price);
+  }
+
+  function applyPriceOverrides(overrides) {
+    if (!overrides) return;
+    MENU.forEach(function(s) {
+      s.items.forEach(function(item) {
+        if (overrides[item.id] !== undefined) {
+          item.price = overrides[item.id];
+        }
+      });
+    });
   }
 
   // ── SAVE / LOAD CUSTOM ITEMS ──

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geetha Vilas – Project Handover</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --green:#1a5c2a; --gold:#c9a227; --cream:#fffdf5; --red:#d32f2f; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; background:#f0f4f0; color:#1a1a1a; }
+
+    header {
+      background:linear-gradient(135deg,#1a5c2a,#2e7d3f);
+      color:#fff; padding:36px 24px; text-align:center;
+    }
+    header h1 { font-family:'Playfair Display',serif; font-size:32px; margin-bottom:6px; }
+    header p { font-size:14px; opacity:.8; }
+    .gold { color:var(--gold); }
+
+    main { max-width:860px; margin:0 auto; padding:30px 20px 60px; }
+
+    .card {
+      background:#fff; border-radius:16px; padding:24px 28px;
+      margin-bottom:20px; border:1px solid #e0e8e0;
+      box-shadow:0 2px 12px rgba(0,0,0,0.06);
+    }
+    .card h2 {
+      font-family:'Playfair Display',serif; font-size:20px; color:var(--green);
+      margin-bottom:16px; padding-bottom:10px; border-bottom:2px solid var(--gold);
+      display:flex; align-items:center; gap:10px;
+    }
+    table { width:100%; border-collapse:collapse; font-size:13.5px; }
+    td, th { padding:10px 14px; border-bottom:1px solid #f0f0f0; text-align:left; }
+    th { background:#f5f9f5; color:var(--green); font-weight:600; font-size:12px; letter-spacing:.5px; }
+    td:first-child { font-weight:600; color:#444; width:35%; }
+    td a { color:var(--green); word-break:break-all; }
+    td code { background:#f0f4f0; padding:2px 8px; border-radius:5px; font-size:12px; color:var(--red); }
+
+    .step { display:flex; gap:14px; align-items:flex-start; margin-bottom:14px; }
+    .step-num {
+      background:var(--green); color:#fff; border-radius:50%;
+      width:28px; height:28px; min-width:28px; display:flex;
+      align-items:center; justify-content:center; font-size:13px; font-weight:700;
+    }
+    .step-text { font-size:13.5px; line-height:1.6; color:#333; }
+    .step-text strong { color:var(--green); }
+
+    .badge {
+      display:inline-block; padding:3px 12px; border-radius:20px;
+      font-size:11px; font-weight:600; letter-spacing:.5px;
+    }
+    .badge-green { background:#e8f5e9; color:var(--green); border:1px solid #a5d6a7; }
+    .badge-gold { background:#fff8e1; color:#c9a227; border:1px solid #ffe082; }
+    .badge-red { background:#ffebee; color:var(--red); border:1px solid #ffcdd2; }
+
+    .warn-box {
+      background:#fff8e1; border:1px solid #ffe082; border-radius:10px;
+      padding:14px 18px; font-size:13px; color:#795548; margin-top:16px;
+    }
+    .warn-box strong { color:#e65100; }
+
+    @media print {
+      body { background:#fff; }
+      .card { box-shadow:none; }
+      header { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🍽️ Geetha Vilas</h1>
+  <p>Project Handover Document &nbsp;•&nbsp; <span class="gold">Digital Menu System</span></p>
+</header>
+
+<main>
+
+  <!-- URLS -->
+  <div class="card">
+    <h2>🔗 Live URLs</h2>
+    <table>
+      <tr><th>Page</th><th>URL</th><th>Who Uses It</th></tr>
+      <tr>
+        <td>📋 Customer Menu</td>
+        <td><a href="https://geethavilas.in" target="_blank">https://geethavilas.in</a></td>
+        <td><span class="badge badge-green">Customers (via QR)</span></td>
+      </tr>
+      <tr>
+        <td>🔐 Admin Panel</td>
+        <td><a href="https://geethavilas.in/admin.html" target="_blank">https://geethavilas.in/admin.html</a></td>
+        <td><span class="badge badge-gold">Restaurant Owner</span></td>
+      </tr>
+      <tr>
+        <td>📱 QR Code Page</td>
+        <td><a href="https://geethavilas.in/qr.html" target="_blank">https://geethavilas.in/qr.html</a></td>
+        <td><span class="badge badge-gold">Owner (print QR)</span></td>
+      </tr>
+      <tr>
+        <td>☁️ Hosting</td>
+        <td><a href="https://vercel.com" target="_blank">Vercel (free)</a></td>
+        <td>Auto-deploys from GitHub</td>
+      </tr>
+      <tr>
+        <td>🔥 Database</td>
+        <td><a href="https://console.firebase.google.com" target="_blank">Firebase Realtime DB</a></td>
+        <td>Stores availability, custom items, prices</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ADMIN CREDENTIALS -->
+  <div class="card">
+    <h2>🔐 Admin Login</h2>
+    <table>
+      <tr><th>Item</th><th>Value</th></tr>
+      <tr><td>Admin URL</td><td><a href="https://geethavilas.in/admin.html">https://geethavilas.in/admin.html</a></td></tr>
+      <tr><td>Password</td><td><code>1234</code> &nbsp;(change this after handover)</td></tr>
+    </table>
+    <div class="warn-box">
+      <strong>⚠️ Important:</strong> Change the admin password after receiving this project.
+      Open <code>admin.html</code> → find <code>const ADMIN_PASS = '1234'</code> → change to your preferred password → push to GitHub.
+    </div>
+  </div>
+
+  <!-- HOW TO USE ADMIN -->
+  <div class="card">
+    <h2>📖 How to Use the Admin Panel</h2>
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Open <strong>https://geethavilas.in/admin.html</strong> on your phone or computer and enter the password.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Toggle items ON/OFF</strong> — flip the green switch next to any item. It auto-saves to the cloud in 1.5 seconds. Customers see the change instantly.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Add new item</strong> — click the <strong>➕ Add Item</strong> button, choose category, enter name & price, click Add.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Edit price</strong> — click the ✏️ pencil icon next to any item's price, type new price, press Enter or ✓.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-text"><strong>Remove item</strong> — click the 🗑 delete button. Removed items stay off permanently (not restored at midnight).</div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-text"><strong>🔄 Reset All</strong> — turns all items back to Available. Also happens automatically every midnight.</div>
+    </div>
+  </div>
+
+  <!-- AUTO SCHEDULE -->
+  <div class="card">
+    <h2>⏰ Auto Schedule (Timings)</h2>
+    <table>
+      <tr><th>Section</th><th>Auto ON</th><th>Auto OFF</th></tr>
+      <tr><td>🌅 Breakfast</td><td>6:00 AM</td><td>11:00 PM</td></tr>
+      <tr><td>🥞 Dosas</td><td>3:00 PM</td><td>11:00 PM</td></tr>
+      <tr><td>🫓 Chapathi / Parota / Tiffins</td><td>3:00 PM</td><td>11:00 PM</td></tr>
+      <tr><td>🍢 Starters & Chinese</td><td>3:00 PM</td><td>11:00 PM</td></tr>
+      <tr><td>🍚 Fried Rice & Noodles</td><td>3:00 PM</td><td>11:00 PM</td></tr>
+      <tr><td>🍽️ Lunch</td><td>Always ON</td><td>—</td></tr>
+      <tr><td>🥤 Milk Shakes</td><td colspan="2">Default OFF — turn on manually</td></tr>
+      <tr><td>🍹 Mojitos</td><td colspan="2">Default OFF — turn on manually</td></tr>
+      <tr><td>🍊 Fresh Juices</td><td colspan="2">Default OFF — turn on manually</td></tr>
+      <tr><td>🍨 Falooda</td><td colspan="2">Default OFF — turn on manually</td></tr>
+    </table>
+  </div>
+
+  <!-- DOMAIN -->
+  <div class="card">
+    <h2>🌐 Custom Domain Setup (geethavilas.in)</h2>
+    <p style="font-size:13px;color:#555;margin-bottom:16px;">To connect <strong>geethavilas.in</strong> to Vercel, add these DNS records at your domain registrar:</p>
+    <table>
+      <tr><th>Type</th><th>Name</th><th>Value</th></tr>
+      <tr><td>A</td><td>@</td><td>76.76.21.21</td></tr>
+      <tr><td>CNAME</td><td>www</td><td>cname.vercel-dns.com</td></tr>
+    </table>
+    <p style="font-size:12px;color:#888;margin-top:10px;">Then in Vercel → Project Settings → Domains → add <code>geethavilas.in</code></p>
+  </div>
+
+  <!-- FILES -->
+  <div class="card">
+    <h2>📁 Project Files</h2>
+    <table>
+      <tr><th>File</th><th>Purpose</th></tr>
+      <tr><td><code>index.html</code></td><td>Customer menu (same as menu.html, entry point)</td></tr>
+      <tr><td><code>menu.html</code></td><td>Customer-facing digital menu</td></tr>
+      <tr><td><code>admin.html</code></td><td>Admin panel for managing availability</td></tr>
+      <tr><td><code>qr.html</code></td><td>QR code generator — download & print</td></tr>
+      <tr><td><code>handover.html</code></td><td>This document</td></tr>
+      <tr><td><code>geetha-vilas-menu-qr.png</code></td><td>Restaurant logo / QR image</td></tr>
+    </table>
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="card">
+    <h2>🛠️ Technology Used</h2>
+    <table>
+      <tr><th>Component</th><th>Technology</th><th>Cost</th></tr>
+      <tr><td>Frontend</td><td>HTML, CSS, JavaScript (no framework)</td><td><span class="badge badge-green">Free</span></td></tr>
+      <tr><td>Database</td><td>Firebase Realtime Database</td><td><span class="badge badge-green">Free (Spark plan)</span></td></tr>
+      <tr><td>Hosting</td><td>Vercel</td><td><span class="badge badge-green">Free</span></td></tr>
+      <tr><td>Domain</td><td>geethavilas.in</td><td><span class="badge badge-gold">~₹500/year</span></td></tr>
+      <tr><td>Fonts</td><td>Google Fonts (Poppins, Playfair Display)</td><td><span class="badge badge-green">Free</span></td></tr>
+    </table>
+  </div>
+
+  <div style="text-align:center;margin-top:30px;">
+    <button onclick="window.print()" style="background:#1a5c2a;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;">🖨️ Print This Document</button>
+  </div>
+
+</main>
+</body>
+</html>
