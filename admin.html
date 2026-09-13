@@ -349,6 +349,7 @@
       const today = now.toDateString();
       if (data.__date !== today) {
         availability = { __date: today };
+        applyDefaultOff(availability);
         db.ref('availability').set(availability);
       } else {
         availability = data;
@@ -608,6 +609,19 @@
     });
   }
 
+  // ── DEFAULT OFF SECTIONS (last 4) ──
+  var DEFAULT_OFF_SECTIONS = ['milkshakes', 'mojitos', 'juices', 'falooda'];
+
+  function applyDefaultOff(avail) {
+    MENU.forEach(function(section) {
+      if (DEFAULT_OFF_SECTIONS.indexOf(section.id) !== -1) {
+        section.items.forEach(function(item) {
+          avail[item.id] = false;
+        });
+      }
+    });
+  }
+
   // ── SECTION TIMINGS ──
   // format: { sectionId: { start: [H, M], end: [H, M] } }
   // null means always available
@@ -639,6 +653,8 @@
   function applyTimingSchedule() {
     var changed = false;
     MENU.forEach(function(section) {
+      // skip default-off sections — admin controls those manually
+      if (DEFAULT_OFF_SECTIONS.indexOf(section.id) !== -1) return;
       var active = isSectionActiveNow(section.id);
       section.items.forEach(function(item) {
         // only auto-control if item hasn't been manually overridden today
@@ -672,6 +688,7 @@
     setTimeout(function() {
       // clear manual overrides and availability, let timing scheduler take over
       availability = { __date: new Date().toDateString() };
+      applyDefaultOff(availability);
       db.ref('availability').set(availability).then(function() {
         applyTimingSchedule();
         renderMenu();
