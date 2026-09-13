@@ -9,7 +9,6 @@
     :root {
       --green-dark:  #1a5c2a;
       --green-mid:   #2e7d3f;
-      --green-light: #e8f5e9;
       --gold:        #c9a227;
       --gold-light:  #f5e6b2;
       --cream:       #fffdf5;
@@ -17,278 +16,123 @@
       --text-mid:    #444;
       --red:         #d32f2f;
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--cream);
-      color: var(--text-dark);
-    }
+    body { font-family: 'Poppins', sans-serif; background: var(--cream); color: var(--text-dark); }
 
     /* ── HEADER ── */
     header {
       background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
-      color: #fff;
-      text-align: center;
-      padding: 32px 20px 24px;
-      position: relative;
-      overflow: hidden;
+      color: #fff; text-align: center; padding: 32px 20px 24px;
+      position: relative; overflow: hidden;
     }
     header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
-    .header-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 14px;
-      letter-spacing: 4px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .header-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 8vw, 56px);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.1;
-    }
-    .header-tel {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(13px, 3vw, 17px);
-      color: var(--gold);
-      letter-spacing: 1px;
-      margin-top: 2px;
-    }
-    .header-tag {
-      display: inline-block;
-      margin-top: 10px;
-      background: var(--gold);
-      color: var(--green-dark);
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 3px;
-      padding: 5px 18px;
-      border-radius: 20px;
-      text-transform: uppercase;
-    }
-    .header-sub {
-      margin-top: 8px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.75);
-      letter-spacing: 1px;
-    }
-    .header-info {
-      margin-top: 14px;
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      font-size: 12px;
-      color: rgba(255,255,255,0.85);
-    }
-    .header-info span { display: flex; align-items: center; gap: 5px; }
+    .header-logo { font-family:'Playfair Display',serif; font-size:14px; letter-spacing:4px; color:var(--gold); text-transform:uppercase; margin-bottom:4px; }
+    .header-name { font-family:'Playfair Display',serif; font-size:clamp(32px,8vw,56px); font-weight:700; color:#fff; line-height:1.1; }
+    .header-tel  { font-family:'Playfair Display',serif; font-size:clamp(13px,3vw,17px); color:var(--gold); letter-spacing:1px; margin-top:2px; }
+    .header-tag  { display:inline-block; margin-top:10px; background:var(--gold); color:var(--green-dark); font-weight:600; font-size:12px; letter-spacing:3px; padding:5px 18px; border-radius:20px; text-transform:uppercase; }
+    .header-sub  { margin-top:8px; font-size:13px; color:rgba(255,255,255,0.75); letter-spacing:1px; }
+    .header-info { margin-top:14px; display:flex; justify-content:center; gap:24px; flex-wrap:wrap; font-size:12px; color:rgba(255,255,255,0.85); }
+    .header-info span { display:flex; align-items:center; gap:5px; }
 
-    /* ── STICKY NAV ── */
+    /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--green-dark);
-      border-bottom: 3px solid var(--gold);
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+      position:sticky; top:0; z-index:100; background:var(--green-dark);
+      border-bottom:3px solid var(--gold); overflow-x:auto; white-space:nowrap;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none;
     }
-    nav::-webkit-scrollbar { display: none; }
-    nav ul {
-      display: inline-flex;
-      list-style: none;
-      padding: 0 12px;
-    }
+    nav::-webkit-scrollbar { display:none; }
+    nav ul { display:inline-flex; list-style:none; padding:0 12px; }
     nav ul li a {
-      display: block;
-      padding: 13px 16px;
-      color: rgba(255,255,255,0.8);
-      text-decoration: none;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      transition: color .2s, border-bottom .2s;
-      border-bottom: 3px solid transparent;
+      display:block; padding:13px 16px; color:rgba(255,255,255,0.8);
+      text-decoration:none; font-size:12px; font-weight:500; letter-spacing:0.5px;
+      transition:color .2s,border-bottom .2s; border-bottom:3px solid transparent;
     }
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: var(--gold);
-      border-bottom-color: var(--gold);
-    }
+    nav ul li a:hover, nav ul li a.active { color:var(--gold); border-bottom-color:var(--gold); }
 
     /* ── MAIN ── */
-    main { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
+    main { max-width:960px; margin:0 auto; padding:20px 16px 60px; }
 
     /* ── SECTION ── */
-    .menu-section { margin-bottom: 40px; scroll-margin-top: 52px; }
+    .menu-section { margin-bottom:40px; scroll-margin-top:52px; }
     .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--gold);
+      display:flex; align-items:center; gap:12px;
+      margin-bottom:16px; padding-bottom:10px; border-bottom:2px solid var(--gold);
     }
-    .section-icon { font-size: 24px; }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(20px, 4vw, 26px);
-      color: var(--green-dark);
-      font-weight: 700;
-    }
-    .section-sub {
-      font-size: 11px;
-      color: var(--text-mid);
-      margin-top: 1px;
-    }
+    .section-icon { font-size:24px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(20px,4vw,26px); color:var(--green-dark); font-weight:700; }
+    .section-sub { font-size:11px; color:var(--text-mid); margin-top:1px; }
     .timing-badge {
-      display: inline-block;
-      background: var(--gold-light);
-      color: var(--green-dark);
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 12px;
-      border: 1px solid var(--gold);
-      margin-left: auto;
+      display:inline-block; background:var(--gold-light); color:var(--green-dark);
+      font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px;
+      border:1px solid var(--gold); margin-left:auto;
     }
 
     /* ── GRID ── */
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 10px;
-    }
+    .items-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
 
     /* ── ITEM CARD ── */
     .item-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid #e8ede8;
-      transition: box-shadow .2s, transform .2s;
-      position: relative;
+      background:#fff; border-radius:10px; padding:12px 16px;
+      display:flex; align-items:center; justify-content:space-between;
+      border:1px solid #e8ede8; transition:box-shadow .2s,transform .2s;
     }
-    .item-card:hover {
-      box-shadow: 0 4px 16px rgba(30,90,50,0.12);
-      transform: translateY(-2px);
-    }
-    .item-card.unavailable {
-      background: #fff5f5;
-      border-color: #ffcdd2;
-      opacity: 0.75;
-    }
-    .item-card.unavailable:hover { transform: none; box-shadow: none; }
+    .item-card:hover { box-shadow:0 4px 16px rgba(30,90,50,0.12); transform:translateY(-2px); }
+    .item-card.unavailable { background:#fff5f5; border-color:#ffcdd2; opacity:.75; }
+    .item-card.unavailable:hover { transform:none; box-shadow:none; }
 
-    .item-left { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-    .veg-dot {
-      width: 14px; height: 14px; min-width: 14px;
-      border-radius: 2px;
-      border: 1.5px solid var(--green-mid);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .veg-dot::after {
-      content: '';
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--green-mid);
-      display: block;
-    }
-    .item-card.unavailable .veg-dot { border-color: #ccc; }
-    .item-card.unavailable .veg-dot::after { background: #ccc; }
+    .item-left { display:flex; align-items:center; gap:10px; flex:1; min-width:0; }
+    .veg-dot { width:14px; height:14px; min-width:14px; border-radius:2px; border:1.5px solid var(--green-mid); display:flex; align-items:center; justify-content:center; }
+    .veg-dot::after { content:''; width:7px; height:7px; border-radius:50%; background:var(--green-mid); display:block; }
+    .item-card.unavailable .veg-dot { border-color:#ccc; }
+    .item-card.unavailable .veg-dot::after { background:#ccc; }
 
-    .item-name {
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--text-dark);
-      line-height: 1.3;
-    }
-    .item-card.unavailable .item-name {
-      text-decoration: line-through;
-      color: #aaa;
-    }
+    .item-name { font-size:13.5px; font-weight:500; color:var(--text-dark); line-height:1.3; }
+    .item-card.unavailable .item-name { text-decoration:line-through; color:#aaa; }
 
-    .item-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; margin-left: 8px; }
-
-    .item-price {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--green-dark);
-      white-space: nowrap;
-    }
-    .item-price::before { content: '₹'; font-size: 11px; }
-    .item-card.unavailable .item-price { color: #bbb; }
+    .item-right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; margin-left:8px; }
+    .item-price { font-size:14px; font-weight:700; color:var(--green-dark); white-space:nowrap; }
+    .item-price::before { content:'₹'; font-size:11px; }
+    .item-card.unavailable .item-price { color:#bbb; }
 
     .unavail-badge {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--red);
-      background: #ffebee;
-      border: 1px solid #ffcdd2;
-      border-radius: 6px;
-      padding: 2px 7px;
-      white-space: nowrap;
+      font-size:10px; font-weight:600; color:var(--red);
+      background:#ffebee; border:1px solid #ffcdd2;
+      border-radius:6px; padding:2px 7px; white-space:nowrap;
+    }
+
+    /* ── LOADING ── */
+    #loadingBar {
+      position:fixed; top:0; left:0; height:3px;
+      background:var(--gold); width:0%; transition:width .3s;
+      z-index:999;
     }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--green-dark);
-      color: rgba(255,255,255,0.85);
-      text-align: center;
-      padding: 24px 20px;
-      font-size: 13px;
-    }
-    footer .footer-tagline {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-    footer a { color: var(--gold); text-decoration: none; }
+    footer { background:var(--green-dark); color:rgba(255,255,255,0.85); text-align:center; padding:24px 20px; font-size:13px; }
+    footer .footer-tagline { font-family:'Playfair Display',serif; font-size:18px; color:var(--gold); margin-bottom:8px; }
+    footer a { color:var(--gold); text-decoration:none; }
 
-    /* ── SCROLL TO TOP ── */
+    /* ── SCROLL TOP ── */
     #scrollTop {
-      position: fixed;
-      bottom: 24px;
-      right: 20px;
-      background: var(--green-dark);
-      color: var(--gold);
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      width: 44px; height: 44px;
-      font-size: 20px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      z-index: 200;
+      position:fixed; bottom:24px; right:20px;
+      background:var(--green-dark); color:var(--gold); border:2px solid var(--gold);
+      border-radius:50%; width:44px; height:44px; font-size:20px; cursor:pointer;
+      display:none; align-items:center; justify-content:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:200;
     }
-    #scrollTop:hover { background: var(--gold); color: var(--green-dark); }
-    #scrollTop.show { display: flex; }
+    #scrollTop:hover { background:var(--gold); color:var(--green-dark); }
+    #scrollTop.show { display:flex; }
 
-    @media (max-width: 480px) {
-      .items-grid { grid-template-columns: 1fr; }
-    }
+    @media(max-width:480px){ .items-grid{ grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<div id="loadingBar"></div>
+
 <header>
   <div class="header-logo">గీతా విలాస్ &nbsp;•&nbsp; Pure Veg</div>
   <div class="header-name">Geetha Vilas</div>
@@ -302,7 +146,6 @@
   </div>
 </header>
 
-<!-- NAV -->
 <nav>
   <ul>
     <li><a href="#breakfast">🌅 Breakfast</a></li>
@@ -318,278 +161,195 @@
   </ul>
 </nav>
 
-<main id="menuMain">
-  <!-- Sections rendered by JS below -->
-</main>
+<main id="menuMain"></main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-tagline">"Taste that makes you come back"</div>
   <p>📍 Sai Nagar (Shar Road), Near HDFC Bank, Thirupathi District, Sullurpeta – 524121</p>
   <p style="margin-top:6px;">📞 <a href="tel:9553556099">9553556099</a> &nbsp;|&nbsp; <a href="tel:9908794579">9908794579</a></p>
   <p style="margin-top:6px;">🕐 6:00 AM – 11:00 PM &nbsp;|&nbsp; 🌿 100% Pure Vegetarian</p>
-  <p style="margin-top:6px; font-size:11px; opacity:.6;">Catering services available for special occasions</p>
+  <p style="margin-top:6px;font-size:11px;opacity:.6;">Catering services available for special occasions</p>
 </footer>
 
 <button id="scrollTop" title="Back to top">↑</button>
 
-<script>
-// ── MENU DATA (same IDs as admin.html) ──
-const MENU = [
-  {
-    id: 'breakfast', icon: '🌅', title: 'Breakfast', sub: 'Fresh every morning', timing: '6 AM – 11 PM',
-    items: [
-      { id: 'idly', name: 'Idly (2 pcs)', price: 30 },
-      { id: 'sambar-idly', name: 'Sambar Idly', price: 50 },
-      { id: 'single-idly', name: 'Single Idly', price: 15 },
-      { id: 'fry-idly', name: 'Fry Idly', price: 90 },
-      { id: 'vada', name: 'Vada', price: 15 },
-      { id: 'sambar-vada', name: 'Sambar Vada', price: 50 },
-      { id: 'ghee-pongal', name: 'Ghee Pongal', price: 55 },
-      { id: 'pesarattu', name: 'Pesarattu', price: 50 },
-      { id: 'onion-pesarattu', name: 'Onion Pesarattu', price: 65 },
-      { id: 'poori', name: 'Poori (2 pcs)', price: 60 },
-      { id: 'chola-poori', name: 'Chola Poori', price: 65 },
-      { id: 'uthappam', name: 'Uthappam', price: 70 },
-    ]
-  },
-  {
-    id: 'dosas', icon: '🥞', title: 'Dosas', sub: 'Crispy & golden', timing: '3 PM – 11 PM',
-    items: [
-      { id: 'plain-dosa', name: 'Plain Dosa', price: 40 },
-      { id: 'masala-dosa', name: 'Masala Dosa', price: 60 },
-      { id: 'onion-dosa', name: 'Onion Dosa', price: 60 },
-      { id: 'ghee-dosa', name: 'Ghee Dosa', price: 60 },
-      { id: 'ghee-karam-dosa', name: 'Ghee Karam Dosa', price: 70 },
-      { id: 'rava-dosa', name: 'Rava Dosa', price: 55 },
-      { id: 'rava-onion-dosa', name: 'Rava Onion Dosa', price: 75 },
-      { id: 'set-dosa', name: 'Set Dosa', price: 55 },
-      { id: 'paneer-dosa', name: 'Paneer Dosa', price: 70 },
-      { id: 'mushroom-dosa', name: 'Mushroom Dosa', price: 70 },
-      { id: 'gobi-dosa', name: 'Gobi Dosa', price: 70 },
-      { id: 'chinese-parota', name: 'Chinese Parota', price: 70 },
-    ]
-  },
-  {
-    id: 'tiffins', icon: '🫓', title: 'Chapathi, Parota & Tiffins', sub: 'Soft & freshly made', timing: '3 PM – 11 PM',
-    items: [
-      { id: 'chapathi', name: 'Chapathi', price: 55 },
-      { id: 'parota', name: 'Parota', price: 55 },
-      { id: 'fry-parota', name: 'Fry Parota', price: 100 },
-      { id: 'fry-chapathi', name: 'Fry Chapathi', price: 100 },
-      { id: 'gobi-chapathi', name: 'Gobi Chapathi', price: 110 },
-      { id: 'mushroom-chapathi', name: 'Mushroom Chapathi', price: 110 },
-      { id: 'paneer-chapathi', name: 'Paneer Chapathi', price: 110 },
-      { id: 'gobi-parota', name: 'Gobi Parota', price: 100 },
-      { id: 'mushroom-parota', name: 'Mushroom Parota', price: 100 },
-      { id: 'paneer-parota', name: 'Paneer Parota', price: 100 },
-    ]
-  },
-  {
-    id: 'starters', icon: '🍢', title: 'Starters & Chinese', sub: 'Crispy bites & tangy flavours', timing: '3 PM – 11 PM',
-    items: [
-      { id: 'gobi-manchuria', name: 'Gobi Manchuria', price: 115 },
-      { id: 'mushroom-manchuria', name: 'Mushroom Manchuria', price: 130 },
-      { id: 'paneer-manchuria', name: 'Paneer Manchuria', price: 140 },
-      { id: 'gobi-65', name: 'Gobi 65', price: 110 },
-      { id: 'paneer-65', name: 'Paneer 65', price: 130 },
-      { id: 'mushroom-65', name: 'Mushroom 65', price: 130 },
-      { id: 'gobi-chilli', name: 'Gobi Chilli', price: 135 },
-      { id: 'mushroom-chilli', name: 'Mushroom Chilli', price: 120 },
-      { id: 'paneer-chilli', name: 'Paneer Chilli', price: 135 },
-    ]
-  },
-  {
-    id: 'rice-noodles', icon: '🍚', title: 'Fried Rice & Noodles', sub: 'Wok-tossed goodness', timing: '3 PM – 11 PM',
-    items: [
-      { id: 'veg-fried-rice', name: 'Veg Fried Rice', price: 100 },
-      { id: 'gobi-fried-rice', name: 'Gobi Fried Rice', price: 125 },
-      { id: 'paneer-fried-rice', name: 'Paneer Fried Rice', price: 135 },
-      { id: 'mushroom-fried-rice', name: 'Mushroom Fried Rice', price: 140 },
-      { id: 'kaju-fried-rice', name: 'Kaju Fried Rice', price: 140 },
-      { id: 'jeera-rice', name: 'Jeera Rice', price: 100 },
-      { id: 'veg-noodles', name: 'Veg Noodles', price: 100 },
-      { id: 'gobi-noodles', name: 'Gobi Noodles', price: 105 },
-      { id: 'paneer-noodles', name: 'Paneer Noodles', price: 125 },
-    ]
-  },
-  {
-    id: 'lunch', icon: '🍽️', title: 'Lunch', sub: 'Homestyle meals & parcels', timing: 'Lunch Hours',
-    items: [
-      { id: 'mini-meals', name: 'Mini Meals (Line)', price: 110 },
-      { id: 'full-meals', name: 'Full Meals Parcel', price: 150 },
-      { id: 'veg-biryani', name: 'Veg Biryani / Parcel', price: 75 },
-      { id: 'tomato-rice', name: 'Tomato Rice / Parcel', price: 65 },
-      { id: 'curd-rice', name: 'Curd Rice / Parcel', price: 65 },
-      { id: 'extra-rice', name: 'Extra Rice', price: 30 },
-      { id: 'sambar-parcel', name: 'Sambar Parcel', price: 30 },
-      { id: 'rasam-parcel', name: 'Rasam Parcel', price: 30 },
-      { id: 'pappu-parcel', name: 'Pappu Parcel', price: 30 },
-      { id: 'thalimpu-parcel', name: 'Thalimpu Parcel', price: 25 },
-    ]
-  },
-  {
-    id: 'milkshakes', icon: '🥤', title: 'Milk Shakes', sub: 'Thick, creamy & chilled', timing: '',
-    items: [
-      { id: 'choco-shake', name: 'Chocolate Milk Shake', price: 90 },
-      { id: 'vanilla-shake', name: 'Vanilla Milk Shake', price: 80 },
-      { id: 'strawberry-shake', name: 'Strawberry Milk Shake', price: 90 },
-      { id: 'mango-shake', name: 'Mango Milk Shake', price: 90 },
-      { id: 'pista-shake', name: 'Pista Milk Shake', price: 90 },
-      { id: 'butterscotch-shake', name: 'Butter Scotch Milk Shake', price: 90 },
-      { id: 'blackcurrant-shake', name: 'Black Currant Milk Shake', price: 90 },
-      { id: 'oreo-shake', name: 'Oreo Milk Shake', price: 100 },
-      { id: 'kitkat-shake', name: 'Kitkat Milk Shake', price: 100 },
-      { id: 'dairymilk-shake', name: 'Dairy Milk Shake', price: 100 },
-      { id: 'fivestar-shake', name: 'Five Star Milk Shake', price: 90 },
-      { id: 'dryfruit-shake', name: 'Dry Fruit Milk Shake', price: 130 },
-      { id: 'apple-shake', name: 'Apple Shake', price: 110 },
-      { id: 'sapota-shake', name: 'Sapota Shake', price: 90 },
-    ]
-  },
-  {
-    id: 'mojitos', icon: '🍹', title: 'Mojitos', sub: 'Refreshing & bubbly', timing: '',
-    items: [
-      { id: 'lemon-mint-mojito', name: 'Lemon Mint Mojito', price: 90 },
-      { id: 'green-apple-mojito', name: 'Green Apple Mojito', price: 95 },
-      { id: 'watermelon-mojito', name: 'Water Melon Mojito', price: 95 },
-      { id: 'pomegranate-mojito', name: 'Pomegranate Mojito', price: 95 },
-      { id: 'bluecuracao-mojito', name: 'Blue Curacao Mojito', price: 90 },
-      { id: 'blueberry-mojito', name: 'Blueberry Mojito', price: 90 },
-    ]
-  },
-  {
-    id: 'juices', icon: '🍊', title: 'Fresh Juices', sub: '100% fresh & natural', timing: '',
-    items: [
-      { id: 'apple-juice', name: 'Apple Juice', price: 70 },
-      { id: 'orange-juice', name: 'Orange Juice', price: 70 },
-      { id: 'mango-juice', name: 'Mango Juice', price: 70 },
-      { id: 'dragonfruit-juice', name: 'Dragon Fruit Juice', price: 80 },
-      { id: 'redbanana-juice', name: 'Red Banana Juice', price: 70 },
-      { id: 'watermelon-juice', name: 'Water Melon Juice', price: 60 },
-      { id: 'pineapple-juice', name: 'Pine Apple Juice', price: 60 },
-      { id: 'grapes-juice', name: 'Grapes Juice', price: 60 },
-      { id: 'sapota-juice', name: 'Sapota Juice', price: 60 },
-      { id: 'papaya-juice', name: 'Papaya Juice', price: 65 },
-      { id: 'strawberry-juice', name: 'Strawberry Juice', price: 85 },
-      { id: 'kiwi-juice', name: 'Kiwi Juice', price: 95 },
-      { id: 'pomegranate-juice', name: 'Pomegranate Juice', price: 60 },
-      { id: 'muskmelon-juice', name: 'Muskmelon Juice', price: 60 },
-      { id: 'dryfruit-juice', name: 'Dry Fruit Juice', price: 110 },
-      { id: 'avocado-juice', name: 'Avocado Juice', price: 100 },
-      { id: 'lemon-soda', name: 'Lemon Soda (Sweet/Salt)', price: 45 },
-    ]
-  },
-  {
-    id: 'falooda', icon: '🍨', title: 'Falooda & Fruit Salad', sub: 'Indulgent dessert drinks', timing: '',
-    items: [
-      { id: 'choco-falooda', name: 'Chocolate Falooda', price: 130 },
-      { id: 'vanilla-falooda', name: 'Vanilla Falooda', price: 120 },
-      { id: 'mango-falooda', name: 'Mango Falooda', price: 130 },
-      { id: 'pista-falooda', name: 'Pista Falooda', price: 140 },
-      { id: 'butterscotch-falooda', name: 'Butter Scotch Falooda', price: 140 },
-      { id: 'blackcurrant-falooda', name: 'Black Currant Falooda', price: 140 },
-      { id: 'fruitnuts-falooda', name: 'Fruit Falooda with Nuts', price: 160 },
-      { id: 'strawberry-falooda', name: 'Strawberry Falooda', price: 130 },
-      { id: 'royal-falooda', name: 'Royal Falooda', price: 130 },
-      { id: 'fruit-falooda', name: 'Fruit Falooda', price: 120 },
-      { id: 'dryfruit-falooda', name: 'Dry Fruit Falooda', price: 190 },
-      { id: 'fruit-salad', name: 'Fruit Salad', price: 70 },
-    ]
-  }
-];
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// ── READ AVAILABILITY ──
-const STORE_KEY = 'gv_availability';
-const DATE_KEY  = 'gv_avail_date';
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTUE_S2F61B7NouDQ81lj_i6fEeKyAag0",
+    authDomain: "getha-qr.firebaseapp.com",
+    databaseURL: "https://getha-qr-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "getha-qr",
+    storageBucket: "getha-qr.firebasestorage.app",
+    messagingSenderId: "254549576707",
+    appId: "1:254549576707:web:cb4643363afe007e675236"
+  };
 
-function checkDailyReset() {
-  const today = new Date().toDateString();
-  if (localStorage.getItem(DATE_KEY) !== today) {
-    localStorage.removeItem(STORE_KEY);
-    localStorage.setItem(DATE_KEY, today);
-  }
-}
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
 
-function getAvailability() {
-  checkDailyReset();
-  const raw = localStorage.getItem(STORE_KEY);
-  return raw ? JSON.parse(raw) : {};
-}
+  // ── MENU DATA ──
+  const MENU = [
+    { id:'breakfast', icon:'🌅', title:'Breakfast', sub:'Fresh every morning', timing:'6 AM – 11 PM', items:[
+      {id:'idly',name:'Idly (2 pcs)',price:30},{id:'sambar-idly',name:'Sambar Idly',price:50},
+      {id:'single-idly',name:'Single Idly',price:15},{id:'fry-idly',name:'Fry Idly',price:90},
+      {id:'vada',name:'Vada',price:15},{id:'sambar-vada',name:'Sambar Vada',price:50},
+      {id:'ghee-pongal',name:'Ghee Pongal',price:55},{id:'pesarattu',name:'Pesarattu',price:50},
+      {id:'onion-pesarattu',name:'Onion Pesarattu',price:65},{id:'poori',name:'Poori (2 pcs)',price:60},
+      {id:'chola-poori',name:'Chola Poori',price:65},{id:'uthappam',name:'Uthappam',price:70}
+    ]},
+    { id:'dosas', icon:'🥞', title:'Dosas', sub:'Crispy & golden', timing:'3 PM – 11 PM', items:[
+      {id:'plain-dosa',name:'Plain Dosa',price:40},{id:'masala-dosa',name:'Masala Dosa',price:60},
+      {id:'onion-dosa',name:'Onion Dosa',price:60},{id:'ghee-dosa',name:'Ghee Dosa',price:60},
+      {id:'ghee-karam-dosa',name:'Ghee Karam Dosa',price:70},{id:'rava-dosa',name:'Rava Dosa',price:55},
+      {id:'rava-onion-dosa',name:'Rava Onion Dosa',price:75},{id:'set-dosa',name:'Set Dosa',price:55},
+      {id:'paneer-dosa',name:'Paneer Dosa',price:70},{id:'mushroom-dosa',name:'Mushroom Dosa',price:70},
+      {id:'gobi-dosa',name:'Gobi Dosa',price:70},{id:'chinese-parota',name:'Chinese Parota',price:70}
+    ]},
+    { id:'tiffins', icon:'🫓', title:'Chapathi, Parota & Tiffins', sub:'Soft & freshly made', timing:'3 PM – 11 PM', items:[
+      {id:'chapathi',name:'Chapathi',price:55},{id:'parota',name:'Parota',price:55},
+      {id:'fry-parota',name:'Fry Parota',price:100},{id:'fry-chapathi',name:'Fry Chapathi',price:100},
+      {id:'gobi-chapathi',name:'Gobi Chapathi',price:110},{id:'mushroom-chapathi',name:'Mushroom Chapathi',price:110},
+      {id:'paneer-chapathi',name:'Paneer Chapathi',price:110},{id:'gobi-parota',name:'Gobi Parota',price:100},
+      {id:'mushroom-parota',name:'Mushroom Parota',price:100},{id:'paneer-parota',name:'Paneer Parota',price:100}
+    ]},
+    { id:'starters', icon:'🍢', title:'Starters & Chinese', sub:'Crispy bites & tangy flavours', timing:'3 PM – 11 PM', items:[
+      {id:'gobi-manchuria',name:'Gobi Manchuria',price:115},{id:'mushroom-manchuria',name:'Mushroom Manchuria',price:130},
+      {id:'paneer-manchuria',name:'Paneer Manchuria',price:140},{id:'gobi-65',name:'Gobi 65',price:110},
+      {id:'paneer-65',name:'Paneer 65',price:130},{id:'mushroom-65',name:'Mushroom 65',price:130},
+      {id:'gobi-chilli',name:'Gobi Chilli',price:135},{id:'mushroom-chilli',name:'Mushroom Chilli',price:120},
+      {id:'paneer-chilli',name:'Paneer Chilli',price:135}
+    ]},
+    { id:'rice-noodles', icon:'🍚', title:'Fried Rice & Noodles', sub:'Wok-tossed goodness', timing:'3 PM – 11 PM', items:[
+      {id:'veg-fried-rice',name:'Veg Fried Rice',price:100},{id:'gobi-fried-rice',name:'Gobi Fried Rice',price:125},
+      {id:'paneer-fried-rice',name:'Paneer Fried Rice',price:135},{id:'mushroom-fried-rice',name:'Mushroom Fried Rice',price:140},
+      {id:'kaju-fried-rice',name:'Kaju Fried Rice',price:140},{id:'jeera-rice',name:'Jeera Rice',price:100},
+      {id:'veg-noodles',name:'Veg Noodles',price:100},{id:'gobi-noodles',name:'Gobi Noodles',price:105},
+      {id:'paneer-noodles',name:'Paneer Noodles',price:125}
+    ]},
+    { id:'lunch', icon:'🍽️', title:'Lunch', sub:'Homestyle meals & parcels', timing:'Lunch Hours', items:[
+      {id:'mini-meals',name:'Mini Meals (Line)',price:110},{id:'full-meals',name:'Full Meals Parcel',price:150},
+      {id:'veg-biryani',name:'Veg Biryani / Parcel',price:75},{id:'tomato-rice',name:'Tomato Rice / Parcel',price:65},
+      {id:'curd-rice',name:'Curd Rice / Parcel',price:65},{id:'extra-rice',name:'Extra Rice',price:30},
+      {id:'sambar-parcel',name:'Sambar Parcel',price:30},{id:'rasam-parcel',name:'Rasam Parcel',price:30},
+      {id:'pappu-parcel',name:'Pappu Parcel',price:30},{id:'thalimpu-parcel',name:'Thalimpu Parcel',price:25}
+    ]},
+    { id:'milkshakes', icon:'🥤', title:'Milk Shakes', sub:'Thick, creamy & chilled', timing:'', items:[
+      {id:'choco-shake',name:'Chocolate Milk Shake',price:90},{id:'vanilla-shake',name:'Vanilla Milk Shake',price:80},
+      {id:'strawberry-shake',name:'Strawberry Milk Shake',price:90},{id:'mango-shake',name:'Mango Milk Shake',price:90},
+      {id:'pista-shake',name:'Pista Milk Shake',price:90},{id:'butterscotch-shake',name:'Butter Scotch Milk Shake',price:90},
+      {id:'blackcurrant-shake',name:'Black Currant Milk Shake',price:90},{id:'oreo-shake',name:'Oreo Milk Shake',price:100},
+      {id:'kitkat-shake',name:'Kitkat Milk Shake',price:100},{id:'dairymilk-shake',name:'Dairy Milk Shake',price:100},
+      {id:'fivestar-shake',name:'Five Star Milk Shake',price:90},{id:'dryfruit-shake',name:'Dry Fruit Milk Shake',price:130},
+      {id:'apple-shake',name:'Apple Shake',price:110},{id:'sapota-shake',name:'Sapota Shake',price:90}
+    ]},
+    { id:'mojitos', icon:'🍹', title:'Mojitos', sub:'Refreshing & bubbly', timing:'', items:[
+      {id:'lemon-mint-mojito',name:'Lemon Mint Mojito',price:90},{id:'green-apple-mojito',name:'Green Apple Mojito',price:95},
+      {id:'watermelon-mojito',name:'Water Melon Mojito',price:95},{id:'pomegranate-mojito',name:'Pomegranate Mojito',price:95},
+      {id:'bluecuracao-mojito',name:'Blue Curacao Mojito',price:90},{id:'blueberry-mojito',name:'Blueberry Mojito',price:90}
+    ]},
+    { id:'juices', icon:'🍊', title:'Fresh Juices', sub:'100% fresh & natural', timing:'', items:[
+      {id:'apple-juice',name:'Apple Juice',price:70},{id:'orange-juice',name:'Orange Juice',price:70},
+      {id:'mango-juice',name:'Mango Juice',price:70},{id:'dragonfruit-juice',name:'Dragon Fruit Juice',price:80},
+      {id:'redbanana-juice',name:'Red Banana Juice',price:70},{id:'watermelon-juice',name:'Water Melon Juice',price:60},
+      {id:'pineapple-juice',name:'Pine Apple Juice',price:60},{id:'grapes-juice',name:'Grapes Juice',price:60},
+      {id:'sapota-juice',name:'Sapota Juice',price:60},{id:'papaya-juice',name:'Papaya Juice',price:65},
+      {id:'strawberry-juice',name:'Strawberry Juice',price:85},{id:'kiwi-juice',name:'Kiwi Juice',price:95},
+      {id:'pomegranate-juice',name:'Pomegranate Juice',price:60},{id:'muskmelon-juice',name:'Muskmelon Juice',price:60},
+      {id:'dryfruit-juice',name:'Dry Fruit Juice',price:110},{id:'avocado-juice',name:'Avocado Juice',price:100},
+      {id:'lemon-soda',name:'Lemon Soda (Sweet/Salt)',price:45}
+    ]},
+    { id:'falooda', icon:'🍨', title:'Falooda & Fruit Salad', sub:'Indulgent dessert drinks', timing:'', items:[
+      {id:'choco-falooda',name:'Chocolate Falooda',price:130},{id:'vanilla-falooda',name:'Vanilla Falooda',price:120},
+      {id:'mango-falooda',name:'Mango Falooda',price:130},{id:'pista-falooda',name:'Pista Falooda',price:140},
+      {id:'butterscotch-falooda',name:'Butter Scotch Falooda',price:140},{id:'blackcurrant-falooda',name:'Black Currant Falooda',price:140},
+      {id:'fruitnuts-falooda',name:'Fruit Falooda with Nuts',price:160},{id:'strawberry-falooda',name:'Strawberry Falooda',price:130},
+      {id:'royal-falooda',name:'Royal Falooda',price:130},{id:'fruit-falooda',name:'Fruit Falooda',price:120},
+      {id:'dryfruit-falooda',name:'Dry Fruit Falooda',price:190},{id:'fruit-salad',name:'Fruit Salad',price:70}
+    ]}
+  ];
 
-// ── RENDER MENU ──
-function renderMenu() {
-  const avail = getAvailability();
-  const main = document.getElementById('menuMain');
-  main.innerHTML = '';
+  // ── RENDER MENU ──
+  function renderMenu(availability) {
+    const main = document.getElementById('menuMain');
+    main.innerHTML = '';
 
-  MENU.forEach(section => {
-    const sec = document.createElement('section');
-    sec.className = 'menu-section';
-    sec.id = section.id;
-
-    sec.innerHTML = `
-      <div class="section-header">
-        <span class="section-icon">${section.icon}</span>
-        <div>
-          <div class="section-title">${section.title}</div>
-          ${section.sub ? `<div class="section-sub">${section.sub}</div>` : ''}
+    MENU.forEach(section => {
+      const sec = document.createElement('section');
+      sec.className = 'menu-section';
+      sec.id = section.id;
+      sec.innerHTML = `
+        <div class="section-header">
+          <span class="section-icon">${section.icon}</span>
+          <div>
+            <div class="section-title">${section.title}</div>
+            ${section.sub ? `<div class="section-sub">${section.sub}</div>` : ''}
+          </div>
+          ${section.timing ? `<span class="timing-badge">${section.timing}</span>` : ''}
         </div>
-        ${section.timing ? `<span class="timing-badge">${section.timing}</span>` : ''}
-      </div>
-      <div class="items-grid">
-        ${section.items.map(item => {
-          const isAvail = avail[item.id] !== false;
-          return `
-            <div class="item-card ${isAvail ? '' : 'unavailable'}">
-              <div class="item-left">
-                <div class="veg-dot"></div>
-                <span class="item-name">${item.name}</span>
-              </div>
-              <div class="item-right">
-                <span class="item-price">${item.price}</span>
-                ${!isAvail ? '<span class="unavail-badge">Not Available</span>' : ''}
-              </div>
-            </div>`;
-        }).join('')}
-      </div>`;
-
-    main.appendChild(sec);
-  });
-}
-
-// ── SCROLL TO TOP ──
-const btn = document.getElementById('scrollTop');
-window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 300));
-btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-// ── ACTIVE NAV ──
-function initNav() {
-  const sections = document.querySelectorAll('.menu-section');
-  const navLinks = document.querySelectorAll('nav a');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
-        if (link) link.classList.add('active');
-      }
+        <div class="items-grid">
+          ${section.items.map(item => {
+            const isAvail = availability[item.id] !== false;
+            return `
+              <div class="item-card ${isAvail ? '' : 'unavailable'}">
+                <div class="item-left">
+                  <div class="veg-dot"></div>
+                  <span class="item-name">${item.name}</span>
+                </div>
+                <div class="item-right">
+                  <span class="item-price">${item.price}</span>
+                  ${!isAvail ? '<span class="unavail-badge">Not Available</span>' : ''}
+                </div>
+              </div>`;
+          }).join('')}
+        </div>`;
+      main.appendChild(sec);
     });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(link.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    initNav();
+  }
+
+  // ── LISTEN TO FIREBASE REAL-TIME ──
+  const bar = document.getElementById('loadingBar');
+  bar.style.width = '40%';
+
+  onValue(ref(db, 'availability'), (snapshot) => {
+    bar.style.width = '100%';
+    setTimeout(() => bar.style.width = '0%', 400);
+    const data = snapshot.val() || {};
+    renderMenu(data);
   });
-}
 
-// ── INIT ──
-renderMenu();
-initNav();
+  // ── NAV ──
+  function initNav() {
+    const sections = document.querySelectorAll('.menu-section');
+    const navLinks = document.querySelectorAll('nav a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(s => observer.observe(s));
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
+    });
+  }
+
+  // ── SCROLL TOP ──
+  const btn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => btn.classList.toggle('show', window.scrollY > 300));
+  btn.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 </script>
 </body>
 </html>

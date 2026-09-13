@@ -17,104 +17,51 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Poppins', sans-serif; background: #f0f4f0; min-height: 100vh; }
 
-    /* ── LOGIN SCREEN ── */
+    /* ── LOGIN ── */
     #loginScreen {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
     }
     .login-card {
-      background: var(--cream);
-      border-radius: 20px;
-      padding: 40px 36px;
-      max-width: 360px;
-      width: 100%;
-      text-align: center;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.13);
-      border-top: 5px solid var(--gold);
+      background: var(--cream); border-radius: 20px; padding: 40px 36px;
+      max-width: 360px; width: 100%; text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.13); border-top: 5px solid var(--gold);
     }
-    .login-card h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--green);
-      font-size: 26px;
-      margin-bottom: 4px;
-    }
+    .login-card h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: 26px; margin-bottom: 4px; }
     .login-card p { font-size: 13px; color: #777; margin-bottom: 28px; }
     .login-card input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 2px solid #ddd;
-      font-size: 18px;
-      text-align: center;
-      letter-spacing: 6px;
-      font-family: 'Poppins', sans-serif;
-      margin-bottom: 14px;
-      outline: none;
-      transition: border .2s;
+      width: 100%; padding: 12px 16px; border-radius: 10px; border: 2px solid #ddd;
+      font-size: 18px; text-align: center; letter-spacing: 6px;
+      font-family: 'Poppins', sans-serif; margin-bottom: 14px; outline: none; transition: border .2s;
     }
     .login-card input:focus { border-color: var(--green); }
     .login-card button {
-      width: 100%;
-      padding: 13px;
-      background: var(--green);
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      transition: opacity .2s;
+      width: 100%; padding: 13px; background: var(--green); color: #fff;
+      border: none; border-radius: 10px; font-size: 15px; font-weight: 600;
+      cursor: pointer; font-family: 'Poppins', sans-serif; transition: opacity .2s;
     }
     .login-card button:hover { opacity: .88; }
-    #loginError {
-      color: var(--red);
-      font-size: 13px;
-      margin-top: 10px;
-      display: none;
-    }
+    #loginError { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
 
-    /* ── ADMIN SCREEN ── */
+    /* ── ADMIN ── */
     #adminScreen { display: none; }
 
     header {
       background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
-      color: #fff;
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      color: #fff; padding: 18px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+      position: sticky; top: 0; z-index: 100;
       box-shadow: 0 2px 12px rgba(0,0,0,0.2);
     }
-    .header-left h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-    }
+    .header-left h1 { font-family: 'Playfair Display', serif; font-size: 22px; }
     .header-left p { font-size: 12px; opacity: .8; margin-top: 2px; }
     .header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .date-badge {
-      background: rgba(255,255,255,0.18);
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-size: 13px;
-      font-weight: 600;
-    }
+    .date-badge { background: rgba(255,255,255,0.18); border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 600; }
+
     .btn {
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      font-family: 'Poppins', sans-serif;
+      padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none; font-family: 'Poppins', sans-serif;
       transition: opacity .2s, transform .15s;
     }
     .btn:hover { opacity: .88; transform: translateY(-1px); }
@@ -122,153 +69,111 @@
     .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
     .btn-red { background: var(--red); color: #fff; }
 
+    /* saving indicator */
+    #saveStatus {
+      font-size: 12px; color: rgba(255,255,255,0.8);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; }
+    .dot.saving { background: var(--gold); animation: pulse .8s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
     main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
 
-    /* ── STATS BAR ── */
-    .stats-bar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
+    .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
     .stat-box {
-      background: #fff;
-      border-radius: 10px;
-      padding: 12px 20px;
-      flex: 1;
-      min-width: 120px;
-      text-align: center;
-      border: 1px solid #e0e8e0;
+      background: #fff; border-radius: 10px; padding: 12px 20px;
+      flex: 1; min-width: 120px; text-align: center; border: 1px solid #e0e8e0;
     }
     .stat-num { font-size: 26px; font-weight: 700; color: var(--green); }
     .stat-num.red { color: var(--red); }
     .stat-label { font-size: 11px; color: #777; margin-top: 2px; }
 
-    /* ── SECTION ── */
-    .section {
-      background: #fff;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      overflow: hidden;
-      border: 1px solid #e0e8e0;
-    }
+    .section { background: #fff; border-radius: 14px; margin-bottom: 16px; overflow: hidden; border: 1px solid #e0e8e0; }
     .section-head {
-      background: var(--green);
-      color: #fff;
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      user-select: none;
+      background: var(--green); color: #fff; padding: 12px 18px;
+      display: flex; align-items: center; justify-content: space-between;
     }
     .section-head-left { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
-    .section-head .toggle-all-btn {
-      font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 6px;
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.4);
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 500;
+    .toggle-all-btn {
+      font-size: 11px; padding: 4px 12px; border-radius: 6px;
+      background: rgba(255,255,255,0.2); color: #fff;
+      border: 1px solid rgba(255,255,255,0.4); cursor: pointer;
+      font-family: 'Poppins', sans-serif; font-weight: 500;
     }
-    .section-head .toggle-all-btn:hover { background: rgba(255,255,255,0.35); }
-    .section-body { padding: 8px 0; }
+    .toggle-all-btn:hover { background: rgba(255,255,255,0.35); }
 
-    /* ── ITEM ROW ── */
     .item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 18px;
-      border-bottom: 1px solid #f0f4f0;
-      transition: background .15s;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 18px; border-bottom: 1px solid #f0f4f0; transition: background .15s;
     }
     .item-row:last-child { border-bottom: none; }
     .item-row:hover { background: #f9fbf9; }
     .item-row.unavailable { background: var(--red-light); }
     .item-row.unavailable:hover { background: #ffdde0; }
-    .item-info { flex: 1; }
     .item-info .name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
     .item-info .price { font-size: 12px; color: #888; margin-top: 1px; }
     .item-row.unavailable .name { text-decoration: line-through; color: #aaa; }
 
-    /* ── TOGGLE SWITCH ── */
+    /* toggle switch */
     .switch { position: relative; display: inline-block; width: 50px; height: 26px; flex-shrink: 0; }
     .switch input { opacity: 0; width: 0; height: 0; }
-    .slider {
-      position: absolute; cursor: pointer;
-      inset: 0; background: #ccc; border-radius: 26px;
-      transition: .3s;
-    }
+    .slider { position: absolute; cursor: pointer; inset: 0; background: #ccc; border-radius: 26px; transition: .3s; }
     .slider:before {
-      content: ''; position: absolute;
-      height: 20px; width: 20px;
-      left: 3px; bottom: 3px;
-      background: #fff; border-radius: 50%;
-      transition: .3s;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      content: ''; position: absolute; height: 20px; width: 20px;
+      left: 3px; bottom: 3px; background: #fff; border-radius: 50%;
+      transition: .3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
     }
     input:checked + .slider { background: var(--green-mid); }
     input:checked + .slider:before { transform: translateX(24px); }
 
-    /* ── SAVE TOAST ── */
+    /* toast */
     #toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
+      position: fixed; bottom: 30px; left: 50%;
       transform: translateX(-50%) translateY(80px);
-      background: var(--green);
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-size: 14px;
-      font-weight: 600;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      transition: transform .3s ease;
-      z-index: 999;
-      white-space: nowrap;
+      background: var(--green); color: #fff; padding: 12px 28px;
+      border-radius: 30px; font-size: 14px; font-weight: 600;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform .3s ease;
+      z-index: 999; white-space: nowrap;
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* ── RESET CONFIRM ── */
+    /* reset confirm */
     #resetConfirm {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 500;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 500;
+      align-items: center; justify-content: center; padding: 20px;
     }
     #resetConfirm.show { display: flex; }
     .confirm-box {
-      background: #fff;
-      border-radius: 16px;
-      padding: 28px 30px;
-      max-width: 340px;
-      width: 100%;
-      text-align: center;
+      background: #fff; border-radius: 16px; padding: 28px 30px;
+      max-width: 340px; width: 100%; text-align: center;
     }
     .confirm-box h3 { color: var(--red); font-size: 18px; margin-bottom: 10px; }
     .confirm-box p { font-size: 13px; color: #555; margin-bottom: 20px; }
     .confirm-box .btn-row { display: flex; gap: 10px; justify-content: center; }
 
-    @media (max-width: 480px) {
-      .stats-bar { flex-direction: row; }
-      .stat-box { min-width: 80px; }
+    /* loading overlay */
+    #loadingOverlay {
+      position: fixed; inset: 0; background: rgba(255,255,255,0.9);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 999; gap: 16px;
     }
+    .spinner {
+      width: 40px; height: 40px; border: 4px solid #e0e8e0;
+      border-top-color: var(--green); border-radius: 50%; animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 480px) { .stats-bar { flex-direction: row; } .stat-box { min-width: 80px; } }
   </style>
 </head>
 <body>
 
-<!-- ── LOGIN ── -->
+<!-- LOGIN -->
 <div id="loginScreen">
   <div class="login-card">
-    <div style="font-size:40px; margin-bottom:12px;">🔐</div>
+    <div style="font-size:40px;margin-bottom:12px;">🔐</div>
     <h2>Admin Login</h2>
     <p>Geetha Vilas – Menu Management</p>
     <input type="password" id="passInput" placeholder="••••" maxlength="10"
@@ -278,7 +183,13 @@
   </div>
 </div>
 
-<!-- ── ADMIN ── -->
+<!-- LOADING -->
+<div id="loadingOverlay" style="display:none;">
+  <div class="spinner"></div>
+  <div style="font-size:14px;color:#555;">Loading menu data...</div>
+</div>
+
+<!-- ADMIN -->
 <div id="adminScreen">
   <header>
     <div class="header-left">
@@ -286,42 +197,30 @@
       <p>Geetha Vilas – Availability Manager</p>
     </div>
     <div class="header-right">
+      <div id="saveStatus"><div class="dot" id="statusDot"></div><span id="statusText">Saved</span></div>
       <div class="date-badge" id="todayDate"></div>
-      <button class="btn btn-gold" onclick="saveAvailability()">💾 Save</button>
+      <button class="btn btn-gold" onclick="saveToFirebase()">💾 Save</button>
       <button class="btn btn-outline" onclick="showResetConfirm()">🔄 Reset All</button>
       <button class="btn btn-outline" onclick="logout()" style="padding:8px 12px;">🚪</button>
     </div>
   </header>
 
   <main>
-    <!-- Stats -->
     <div class="stats-bar">
-      <div class="stat-box">
-        <div class="stat-num" id="statTotal">0</div>
-        <div class="stat-label">Total Items</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="statAvail">0</div>
-        <div class="stat-label">Available</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num red" id="statUnavail">0</div>
-        <div class="stat-label">Not Available</div>
-      </div>
+      <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Items</div></div>
+      <div class="stat-box"><div class="stat-num" id="statAvail">0</div><div class="stat-label">Available</div></div>
+      <div class="stat-box"><div class="stat-num red" id="statUnavail">0</div><div class="stat-label">Not Available</div></div>
     </div>
-
     <div id="menuContainer"></div>
   </main>
 </div>
 
-<!-- Toast -->
-<div id="toast">✅ Saved successfully!</div>
+<div id="toast">✅ Saved!</div>
 
-<!-- Reset Confirm -->
 <div id="resetConfirm">
   <div class="confirm-box">
     <h3>Reset All Items?</h3>
-    <p>This will mark all items as <strong>Available</strong>. This happens automatically every day at midnight.</p>
+    <p>All items will be marked <strong>Available</strong>. This also happens automatically every day at midnight.</p>
     <div class="btn-row">
       <button class="btn btn-red" onclick="resetAll()">Yes, Reset</button>
       <button class="btn" style="background:#eee;color:#333;" onclick="hideResetConfirm()">Cancel</button>
@@ -329,346 +228,287 @@
   </div>
 </div>
 
-<script>
-// ── PASSWORD ──
-const ADMIN_PASS = '1234'; // Change this to your preferred password
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// ── MENU DATA ──
-const MENU = [
-  {
-    id: 'breakfast', icon: '🌅', title: 'Breakfast',
-    items: [
-      { id: 'idly', name: 'Idly (2 pcs)', price: 30 },
-      { id: 'sambar-idly', name: 'Sambar Idly', price: 50 },
-      { id: 'single-idly', name: 'Single Idly', price: 15 },
-      { id: 'fry-idly', name: 'Fry Idly', price: 90 },
-      { id: 'vada', name: 'Vada', price: 15 },
-      { id: 'sambar-vada', name: 'Sambar Vada', price: 50 },
-      { id: 'ghee-pongal', name: 'Ghee Pongal', price: 55 },
-      { id: 'pesarattu', name: 'Pesarattu', price: 50 },
-      { id: 'onion-pesarattu', name: 'Onion Pesarattu', price: 65 },
-      { id: 'poori', name: 'Poori (2 pcs)', price: 60 },
-      { id: 'chola-poori', name: 'Chola Poori', price: 65 },
-      { id: 'uthappam', name: 'Uthappam', price: 70 },
-    ]
-  },
-  {
-    id: 'dosas', icon: '🥞', title: 'Dosas',
-    items: [
-      { id: 'plain-dosa', name: 'Plain Dosa', price: 40 },
-      { id: 'masala-dosa', name: 'Masala Dosa', price: 60 },
-      { id: 'onion-dosa', name: 'Onion Dosa', price: 60 },
-      { id: 'ghee-dosa', name: 'Ghee Dosa', price: 60 },
-      { id: 'ghee-karam-dosa', name: 'Ghee Karam Dosa', price: 70 },
-      { id: 'rava-dosa', name: 'Rava Dosa', price: 55 },
-      { id: 'rava-onion-dosa', name: 'Rava Onion Dosa', price: 75 },
-      { id: 'set-dosa', name: 'Set Dosa', price: 55 },
-      { id: 'paneer-dosa', name: 'Paneer Dosa', price: 70 },
-      { id: 'mushroom-dosa', name: 'Mushroom Dosa', price: 70 },
-      { id: 'gobi-dosa', name: 'Gobi Dosa', price: 70 },
-      { id: 'chinese-parota', name: 'Chinese Parota', price: 70 },
-    ]
-  },
-  {
-    id: 'tiffins', icon: '🫓', title: 'Chapathi, Parota & Tiffins',
-    items: [
-      { id: 'chapathi', name: 'Chapathi', price: 55 },
-      { id: 'parota', name: 'Parota', price: 55 },
-      { id: 'fry-parota', name: 'Fry Parota', price: 100 },
-      { id: 'fry-chapathi', name: 'Fry Chapathi', price: 100 },
-      { id: 'gobi-chapathi', name: 'Gobi Chapathi', price: 110 },
-      { id: 'mushroom-chapathi', name: 'Mushroom Chapathi', price: 110 },
-      { id: 'paneer-chapathi', name: 'Paneer Chapathi', price: 110 },
-      { id: 'gobi-parota', name: 'Gobi Parota', price: 100 },
-      { id: 'mushroom-parota', name: 'Mushroom Parota', price: 100 },
-      { id: 'paneer-parota', name: 'Paneer Parota', price: 100 },
-    ]
-  },
-  {
-    id: 'starters', icon: '🍢', title: 'Starters & Chinese',
-    items: [
-      { id: 'gobi-manchuria', name: 'Gobi Manchuria', price: 115 },
-      { id: 'mushroom-manchuria', name: 'Mushroom Manchuria', price: 130 },
-      { id: 'paneer-manchuria', name: 'Paneer Manchuria', price: 140 },
-      { id: 'gobi-65', name: 'Gobi 65', price: 110 },
-      { id: 'paneer-65', name: 'Paneer 65', price: 130 },
-      { id: 'mushroom-65', name: 'Mushroom 65', price: 130 },
-      { id: 'gobi-chilli', name: 'Gobi Chilli', price: 135 },
-      { id: 'mushroom-chilli', name: 'Mushroom Chilli', price: 120 },
-      { id: 'paneer-chilli', name: 'Paneer Chilli', price: 135 },
-    ]
-  },
-  {
-    id: 'rice-noodles', icon: '🍚', title: 'Fried Rice & Noodles',
-    items: [
-      { id: 'veg-fried-rice', name: 'Veg Fried Rice', price: 100 },
-      { id: 'gobi-fried-rice', name: 'Gobi Fried Rice', price: 125 },
-      { id: 'paneer-fried-rice', name: 'Paneer Fried Rice', price: 135 },
-      { id: 'mushroom-fried-rice', name: 'Mushroom Fried Rice', price: 140 },
-      { id: 'kaju-fried-rice', name: 'Kaju Fried Rice', price: 140 },
-      { id: 'jeera-rice', name: 'Jeera Rice', price: 100 },
-      { id: 'veg-noodles', name: 'Veg Noodles', price: 100 },
-      { id: 'gobi-noodles', name: 'Gobi Noodles', price: 105 },
-      { id: 'paneer-noodles', name: 'Paneer Noodles', price: 125 },
-    ]
-  },
-  {
-    id: 'lunch', icon: '🍽️', title: 'Lunch',
-    items: [
-      { id: 'mini-meals', name: 'Mini Meals (Line)', price: 110 },
-      { id: 'full-meals', name: 'Full Meals Parcel', price: 150 },
-      { id: 'veg-biryani', name: 'Veg Biryani / Parcel', price: 75 },
-      { id: 'tomato-rice', name: 'Tomato Rice / Parcel', price: 65 },
-      { id: 'curd-rice', name: 'Curd Rice / Parcel', price: 65 },
-      { id: 'extra-rice', name: 'Extra Rice', price: 30 },
-      { id: 'sambar-parcel', name: 'Sambar Parcel', price: 30 },
-      { id: 'rasam-parcel', name: 'Rasam Parcel', price: 30 },
-      { id: 'pappu-parcel', name: 'Pappu Parcel', price: 30 },
-      { id: 'thalimpu-parcel', name: 'Thalimpu Parcel', price: 25 },
-    ]
-  },
-  {
-    id: 'milkshakes', icon: '🥤', title: 'Milk Shakes',
-    items: [
-      { id: 'choco-shake', name: 'Chocolate Milk Shake', price: 90 },
-      { id: 'vanilla-shake', name: 'Vanilla Milk Shake', price: 80 },
-      { id: 'strawberry-shake', name: 'Strawberry Milk Shake', price: 90 },
-      { id: 'mango-shake', name: 'Mango Milk Shake', price: 90 },
-      { id: 'pista-shake', name: 'Pista Milk Shake', price: 90 },
-      { id: 'butterscotch-shake', name: 'Butter Scotch Milk Shake', price: 90 },
-      { id: 'blackcurrant-shake', name: 'Black Currant Milk Shake', price: 90 },
-      { id: 'oreo-shake', name: 'Oreo Milk Shake', price: 100 },
-      { id: 'kitkat-shake', name: 'Kitkat Milk Shake', price: 100 },
-      { id: 'dairymilk-shake', name: 'Dairy Milk Shake', price: 100 },
-      { id: 'fivestar-shake', name: 'Five Star Milk Shake', price: 90 },
-      { id: 'dryfruit-shake', name: 'Dry Fruit Milk Shake', price: 130 },
-      { id: 'apple-shake', name: 'Apple Shake', price: 110 },
-      { id: 'sapota-shake', name: 'Sapota Shake', price: 90 },
-    ]
-  },
-  {
-    id: 'mojitos', icon: '🍹', title: 'Mojitos',
-    items: [
-      { id: 'lemon-mint-mojito', name: 'Lemon Mint Mojito', price: 90 },
-      { id: 'green-apple-mojito', name: 'Green Apple Mojito', price: 95 },
-      { id: 'watermelon-mojito', name: 'Water Melon Mojito', price: 95 },
-      { id: 'pomegranate-mojito', name: 'Pomegranate Mojito', price: 95 },
-      { id: 'bluecuracao-mojito', name: 'Blue Curacao Mojito', price: 90 },
-      { id: 'blueberry-mojito', name: 'Blueberry Mojito', price: 90 },
-    ]
-  },
-  {
-    id: 'juices', icon: '🍊', title: 'Fresh Juices',
-    items: [
-      { id: 'apple-juice', name: 'Apple Juice', price: 70 },
-      { id: 'orange-juice', name: 'Orange Juice', price: 70 },
-      { id: 'mango-juice', name: 'Mango Juice', price: 70 },
-      { id: 'dragonfruit-juice', name: 'Dragon Fruit Juice', price: 80 },
-      { id: 'redbanana-juice', name: 'Red Banana Juice', price: 70 },
-      { id: 'watermelon-juice', name: 'Water Melon Juice', price: 60 },
-      { id: 'pineapple-juice', name: 'Pine Apple Juice', price: 60 },
-      { id: 'grapes-juice', name: 'Grapes Juice', price: 60 },
-      { id: 'sapota-juice', name: 'Sapota Juice', price: 60 },
-      { id: 'papaya-juice', name: 'Papaya Juice', price: 65 },
-      { id: 'strawberry-juice', name: 'Strawberry Juice', price: 85 },
-      { id: 'kiwi-juice', name: 'Kiwi Juice', price: 95 },
-      { id: 'pomegranate-juice', name: 'Pomegranate Juice', price: 60 },
-      { id: 'muskmelon-juice', name: 'Muskmelon Juice', price: 60 },
-      { id: 'dryfruit-juice', name: 'Dry Fruit Juice', price: 110 },
-      { id: 'avocado-juice', name: 'Avocado Juice', price: 100 },
-      { id: 'lemon-soda', name: 'Lemon Soda (Sweet/Salt)', price: 45 },
-    ]
-  },
-  {
-    id: 'falooda', icon: '🍨', title: 'Falooda & Fruit Salad',
-    items: [
-      { id: 'choco-falooda', name: 'Chocolate Falooda', price: 130 },
-      { id: 'vanilla-falooda', name: 'Vanilla Falooda', price: 120 },
-      { id: 'mango-falooda', name: 'Mango Falooda', price: 130 },
-      { id: 'pista-falooda', name: 'Pista Falooda', price: 140 },
-      { id: 'butterscotch-falooda', name: 'Butter Scotch Falooda', price: 140 },
-      { id: 'blackcurrant-falooda', name: 'Black Currant Falooda', price: 140 },
-      { id: 'fruitnuts-falooda', name: 'Fruit Falooda with Nuts', price: 160 },
-      { id: 'strawberry-falooda', name: 'Strawberry Falooda', price: 130 },
-      { id: 'royal-falooda', name: 'Royal Falooda', price: 130 },
-      { id: 'fruit-falooda', name: 'Fruit Falooda', price: 120 },
-      { id: 'dryfruit-falooda', name: 'Dry Fruit Falooda', price: 190 },
-      { id: 'fruit-salad', name: 'Fruit Salad', price: 70 },
-    ]
-  }
-];
+  const firebaseConfig = {
+    apiKey: "AIzaSyBTUE_S2F61B7NouDQ81lj_i6fEeKyAag0",
+    authDomain: "getha-qr.firebaseapp.com",
+    databaseURL: "https://getha-qr-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "getha-qr",
+    storageBucket: "getha-qr.firebasestorage.app",
+    messagingSenderId: "254549576707",
+    appId: "1:254549576707:web:cb4643363afe007e675236"
+  };
 
-// ── STORAGE KEY ──
-const STORE_KEY = 'gv_availability';
-const DATE_KEY  = 'gv_avail_date';
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
 
-// ── DAILY RESET ──
-function checkDailyReset() {
-  const today = new Date().toDateString();
-  const stored = localStorage.getItem(DATE_KEY);
-  if (stored !== today) {
-    localStorage.removeItem(STORE_KEY);
-    localStorage.setItem(DATE_KEY, today);
-  }
-}
+  // ── MENU DATA ──
+  const MENU = [
+    { id:'breakfast', icon:'🌅', title:'Breakfast', items:[
+      {id:'idly',name:'Idly (2 pcs)',price:30},{id:'sambar-idly',name:'Sambar Idly',price:50},
+      {id:'single-idly',name:'Single Idly',price:15},{id:'fry-idly',name:'Fry Idly',price:90},
+      {id:'vada',name:'Vada',price:15},{id:'sambar-vada',name:'Sambar Vada',price:50},
+      {id:'ghee-pongal',name:'Ghee Pongal',price:55},{id:'pesarattu',name:'Pesarattu',price:50},
+      {id:'onion-pesarattu',name:'Onion Pesarattu',price:65},{id:'poori',name:'Poori (2 pcs)',price:60},
+      {id:'chola-poori',name:'Chola Poori',price:65},{id:'uthappam',name:'Uthappam',price:70}
+    ]},
+    { id:'dosas', icon:'🥞', title:'Dosas', items:[
+      {id:'plain-dosa',name:'Plain Dosa',price:40},{id:'masala-dosa',name:'Masala Dosa',price:60},
+      {id:'onion-dosa',name:'Onion Dosa',price:60},{id:'ghee-dosa',name:'Ghee Dosa',price:60},
+      {id:'ghee-karam-dosa',name:'Ghee Karam Dosa',price:70},{id:'rava-dosa',name:'Rava Dosa',price:55},
+      {id:'rava-onion-dosa',name:'Rava Onion Dosa',price:75},{id:'set-dosa',name:'Set Dosa',price:55},
+      {id:'paneer-dosa',name:'Paneer Dosa',price:70},{id:'mushroom-dosa',name:'Mushroom Dosa',price:70},
+      {id:'gobi-dosa',name:'Gobi Dosa',price:70},{id:'chinese-parota',name:'Chinese Parota',price:70}
+    ]},
+    { id:'tiffins', icon:'🫓', title:'Chapathi, Parota & Tiffins', items:[
+      {id:'chapathi',name:'Chapathi',price:55},{id:'parota',name:'Parota',price:55},
+      {id:'fry-parota',name:'Fry Parota',price:100},{id:'fry-chapathi',name:'Fry Chapathi',price:100},
+      {id:'gobi-chapathi',name:'Gobi Chapathi',price:110},{id:'mushroom-chapathi',name:'Mushroom Chapathi',price:110},
+      {id:'paneer-chapathi',name:'Paneer Chapathi',price:110},{id:'gobi-parota',name:'Gobi Parota',price:100},
+      {id:'mushroom-parota',name:'Mushroom Parota',price:100},{id:'paneer-parota',name:'Paneer Parota',price:100}
+    ]},
+    { id:'starters', icon:'🍢', title:'Starters & Chinese', items:[
+      {id:'gobi-manchuria',name:'Gobi Manchuria',price:115},{id:'mushroom-manchuria',name:'Mushroom Manchuria',price:130},
+      {id:'paneer-manchuria',name:'Paneer Manchuria',price:140},{id:'gobi-65',name:'Gobi 65',price:110},
+      {id:'paneer-65',name:'Paneer 65',price:130},{id:'mushroom-65',name:'Mushroom 65',price:130},
+      {id:'gobi-chilli',name:'Gobi Chilli',price:135},{id:'mushroom-chilli',name:'Mushroom Chilli',price:120},
+      {id:'paneer-chilli',name:'Paneer Chilli',price:135}
+    ]},
+    { id:'rice-noodles', icon:'🍚', title:'Fried Rice & Noodles', items:[
+      {id:'veg-fried-rice',name:'Veg Fried Rice',price:100},{id:'gobi-fried-rice',name:'Gobi Fried Rice',price:125},
+      {id:'paneer-fried-rice',name:'Paneer Fried Rice',price:135},{id:'mushroom-fried-rice',name:'Mushroom Fried Rice',price:140},
+      {id:'kaju-fried-rice',name:'Kaju Fried Rice',price:140},{id:'jeera-rice',name:'Jeera Rice',price:100},
+      {id:'veg-noodles',name:'Veg Noodles',price:100},{id:'gobi-noodles',name:'Gobi Noodles',price:105},
+      {id:'paneer-noodles',name:'Paneer Noodles',price:125}
+    ]},
+    { id:'lunch', icon:'🍽️', title:'Lunch', items:[
+      {id:'mini-meals',name:'Mini Meals (Line)',price:110},{id:'full-meals',name:'Full Meals Parcel',price:150},
+      {id:'veg-biryani',name:'Veg Biryani / Parcel',price:75},{id:'tomato-rice',name:'Tomato Rice / Parcel',price:65},
+      {id:'curd-rice',name:'Curd Rice / Parcel',price:65},{id:'extra-rice',name:'Extra Rice',price:30},
+      {id:'sambar-parcel',name:'Sambar Parcel',price:30},{id:'rasam-parcel',name:'Rasam Parcel',price:30},
+      {id:'pappu-parcel',name:'Pappu Parcel',price:30},{id:'thalimpu-parcel',name:'Thalimpu Parcel',price:25}
+    ]},
+    { id:'milkshakes', icon:'🥤', title:'Milk Shakes', items:[
+      {id:'choco-shake',name:'Chocolate Milk Shake',price:90},{id:'vanilla-shake',name:'Vanilla Milk Shake',price:80},
+      {id:'strawberry-shake',name:'Strawberry Milk Shake',price:90},{id:'mango-shake',name:'Mango Milk Shake',price:90},
+      {id:'pista-shake',name:'Pista Milk Shake',price:90},{id:'butterscotch-shake',name:'Butter Scotch Milk Shake',price:90},
+      {id:'blackcurrant-shake',name:'Black Currant Milk Shake',price:90},{id:'oreo-shake',name:'Oreo Milk Shake',price:100},
+      {id:'kitkat-shake',name:'Kitkat Milk Shake',price:100},{id:'dairymilk-shake',name:'Dairy Milk Shake',price:100},
+      {id:'fivestar-shake',name:'Five Star Milk Shake',price:90},{id:'dryfruit-shake',name:'Dry Fruit Milk Shake',price:130},
+      {id:'apple-shake',name:'Apple Shake',price:110},{id:'sapota-shake',name:'Sapota Shake',price:90}
+    ]},
+    { id:'mojitos', icon:'🍹', title:'Mojitos', items:[
+      {id:'lemon-mint-mojito',name:'Lemon Mint Mojito',price:90},{id:'green-apple-mojito',name:'Green Apple Mojito',price:95},
+      {id:'watermelon-mojito',name:'Water Melon Mojito',price:95},{id:'pomegranate-mojito',name:'Pomegranate Mojito',price:95},
+      {id:'bluecuracao-mojito',name:'Blue Curacao Mojito',price:90},{id:'blueberry-mojito',name:'Blueberry Mojito',price:90}
+    ]},
+    { id:'juices', icon:'🍊', title:'Fresh Juices', items:[
+      {id:'apple-juice',name:'Apple Juice',price:70},{id:'orange-juice',name:'Orange Juice',price:70},
+      {id:'mango-juice',name:'Mango Juice',price:70},{id:'dragonfruit-juice',name:'Dragon Fruit Juice',price:80},
+      {id:'redbanana-juice',name:'Red Banana Juice',price:70},{id:'watermelon-juice',name:'Water Melon Juice',price:60},
+      {id:'pineapple-juice',name:'Pine Apple Juice',price:60},{id:'grapes-juice',name:'Grapes Juice',price:60},
+      {id:'sapota-juice',name:'Sapota Juice',price:60},{id:'papaya-juice',name:'Papaya Juice',price:65},
+      {id:'strawberry-juice',name:'Strawberry Juice',price:85},{id:'kiwi-juice',name:'Kiwi Juice',price:95},
+      {id:'pomegranate-juice',name:'Pomegranate Juice',price:60},{id:'muskmelon-juice',name:'Muskmelon Juice',price:60},
+      {id:'dryfruit-juice',name:'Dry Fruit Juice',price:110},{id:'avocado-juice',name:'Avocado Juice',price:100},
+      {id:'lemon-soda',name:'Lemon Soda (Sweet/Salt)',price:45}
+    ]},
+    { id:'falooda', icon:'🍨', title:'Falooda & Fruit Salad', items:[
+      {id:'choco-falooda',name:'Chocolate Falooda',price:130},{id:'vanilla-falooda',name:'Vanilla Falooda',price:120},
+      {id:'mango-falooda',name:'Mango Falooda',price:130},{id:'pista-falooda',name:'Pista Falooda',price:140},
+      {id:'butterscotch-falooda',name:'Butter Scotch Falooda',price:140},{id:'blackcurrant-falooda',name:'Black Currant Falooda',price:140},
+      {id:'fruitnuts-falooda',name:'Fruit Falooda with Nuts',price:160},{id:'strawberry-falooda',name:'Strawberry Falooda',price:130},
+      {id:'royal-falooda',name:'Royal Falooda',price:130},{id:'fruit-falooda',name:'Fruit Falooda',price:120},
+      {id:'dryfruit-falooda',name:'Dry Fruit Falooda',price:190},{id:'fruit-salad',name:'Fruit Salad',price:70}
+    ]}
+  ];
 
-// ── GET / SET AVAILABILITY ──
-function getAvailability() {
-  const raw = localStorage.getItem(STORE_KEY);
-  return raw ? JSON.parse(raw) : {};
-}
+  const ADMIN_PASS = '1234';
+  let availability = {};
 
-function setAvailability(data) {
-  localStorage.setItem(STORE_KEY, JSON.stringify(data));
-}
-
-// ── LOGIN ──
-function doLogin() {
-  const val = document.getElementById('passInput').value;
-  if (val === ADMIN_PASS) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminScreen').style.display = 'block';
-    initAdmin();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
-    document.getElementById('passInput').value = '';
-    document.getElementById('passInput').focus();
-  }
-}
-
-function logout() {
-  document.getElementById('adminScreen').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('passInput').value = '';
-}
-
-// ── INIT ──
-function initAdmin() {
-  checkDailyReset();
-
-  // Date display
-  const now = new Date();
-  document.getElementById('todayDate').textContent =
-    now.toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-
-  renderMenu();
-  updateStats();
-
-  // Schedule midnight reset
-  scheduleMidnightReset();
-}
-
-function renderMenu() {
-  const avail = getAvailability();
-  const container = document.getElementById('menuContainer');
-  container.innerHTML = '';
-
-  MENU.forEach(section => {
-    const div = document.createElement('div');
-    div.className = 'section';
-    div.innerHTML = `
-      <div class="section-head">
-        <div class="section-head-left">${section.icon} ${section.title}</div>
-        <button class="toggle-all-btn" onclick="toggleSection('${section.id}', event)">Toggle All</button>
-      </div>
-      <div class="section-body" id="body-${section.id}">
-        ${section.items.map(item => {
-          const isAvail = avail[item.id] !== false; // default true
-          return `
-            <div class="item-row ${isAvail ? '' : 'unavailable'}" id="row-${item.id}">
-              <div class="item-info">
-                <div class="name">${item.name}</div>
-                <div class="price">₹${item.price}</div>
-              </div>
-              <label class="switch">
-                <input type="checkbox" id="chk-${item.id}" ${isAvail ? 'checked' : ''}
-                  onchange="onToggle('${item.id}', this.checked)" />
-                <span class="slider"></span>
-              </label>
-            </div>`;
-        }).join('')}
-      </div>`;
-    container.appendChild(div);
-  });
-}
-
-function onToggle(itemId, checked) {
-  const row = document.getElementById('row-' + itemId);
-  if (checked) row.classList.remove('unavailable');
-  else row.classList.add('unavailable');
-  updateStats();
-}
-
-function toggleSection(sectionId, e) {
-  e.stopPropagation();
-  const section = MENU.find(s => s.id === sectionId);
-  const allChecked = section.items.every(item => document.getElementById('chk-' + item.id)?.checked);
-  section.items.forEach(item => {
-    const chk = document.getElementById('chk-' + item.id);
-    if (chk) {
-      chk.checked = !allChecked;
-      onToggle(item.id, !allChecked);
+  // ── LOGIN ──
+  window.doLogin = function() {
+    const val = document.getElementById('passInput').value;
+    if (val === ADMIN_PASS) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('loadingOverlay').style.display = 'flex';
+      document.getElementById('adminScreen').style.display = 'block';
+      initAdmin();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      document.getElementById('passInput').value = '';
     }
-  });
-}
+  };
 
-function updateStats() {
-  let total = 0, unavail = 0;
-  MENU.forEach(s => s.items.forEach(item => {
-    total++;
-    const chk = document.getElementById('chk-' + item.id);
-    if (chk && !chk.checked) unavail++;
-  }));
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statAvail').textContent = total - unavail;
-  document.getElementById('statUnavail').textContent = unavail;
-}
+  window.logout = function() {
+    document.getElementById('adminScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('passInput').value = '';
+  };
 
-function saveAvailability() {
-  const data = {};
-  MENU.forEach(s => s.items.forEach(item => {
-    const chk = document.getElementById('chk-' + item.id);
-    if (chk) data[item.id] = chk.checked;
-  }));
-  setAvailability(data);
-  showToast('✅ Saved! Menu updated.');
-}
+  // ── INIT ──
+  async function initAdmin() {
+    // Date
+    const now = new Date();
+    document.getElementById('todayDate').textContent =
+      now.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
 
-// ── RESET ──
-function showResetConfirm() { document.getElementById('resetConfirm').classList.add('show'); }
-function hideResetConfirm() { document.getElementById('resetConfirm').classList.remove('show'); }
-function resetAll() {
-  localStorage.removeItem(STORE_KEY);
-  localStorage.setItem(DATE_KEY, new Date().toDateString());
-  hideResetConfirm();
-  renderMenu();
-  updateStats();
-  showToast('🔄 All items reset to Available');
-}
+    // Load from Firebase
+    try {
+      const snap = await get(ref(db, 'availability'));
+      const data = snap.val() || {};
 
-// ── TOAST ──
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
-}
+      // Daily reset check
+      const today = now.toDateString();
+      if (data.__date !== today) {
+        availability = { __date: today };
+      } else {
+        availability = data;
+      }
+    } catch(e) {
+      availability = { __date: now.toDateString() };
+    }
 
-// ── MIDNIGHT RESET ──
-function scheduleMidnightReset() {
-  const now = new Date();
-  const midnight = new Date(now);
-  midnight.setHours(24, 0, 0, 0);
-  const msUntilMidnight = midnight - now;
-  setTimeout(() => {
-    localStorage.removeItem(STORE_KEY);
-    localStorage.setItem(DATE_KEY, new Date().toDateString());
+    document.getElementById('loadingOverlay').style.display = 'none';
     renderMenu();
     updateStats();
-    showToast('🌅 New day! Menu availability reset.');
-    scheduleMidnightReset(); // schedule next day
-  }, msUntilMidnight);
-}
+    scheduleMidnightReset();
+  }
+
+  // ── RENDER ──
+  function renderMenu() {
+    const container = document.getElementById('menuContainer');
+    container.innerHTML = '';
+    MENU.forEach(section => {
+      const div = document.createElement('div');
+      div.className = 'section';
+      div.innerHTML = `
+        <div class="section-head">
+          <div class="section-head-left">${section.icon} ${section.title}</div>
+          <button class="toggle-all-btn" onclick="toggleSection('${section.id}')">Toggle All</button>
+        </div>
+        <div class="section-body">
+          ${section.items.map(item => {
+            const isAvail = availability[item.id] !== false;
+            return `
+              <div class="item-row ${isAvail?'':'unavailable'}" id="row-${item.id}">
+                <div class="item-info">
+                  <div class="name">${item.name}</div>
+                  <div class="price">₹${item.price}</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="chk-${item.id}" ${isAvail?'checked':''}
+                    onchange="onToggle('${item.id}', this.checked)" />
+                  <span class="slider"></span>
+                </label>
+              </div>`;
+          }).join('')}
+        </div>`;
+      container.appendChild(div);
+    });
+  }
+
+  window.onToggle = function(itemId, checked) {
+    const row = document.getElementById('row-' + itemId);
+    checked ? row.classList.remove('unavailable') : row.classList.add('unavailable');
+    availability[itemId] = checked;
+    updateStats();
+    setSaveStatus('saving');
+    debouncedSave();
+  };
+
+  window.toggleSection = function(sectionId) {
+    const section = MENU.find(s => s.id === sectionId);
+    const allChecked = section.items.every(item => document.getElementById('chk-' + item.id)?.checked);
+    section.items.forEach(item => {
+      const chk = document.getElementById('chk-' + item.id);
+      if (chk) { chk.checked = !allChecked; window.onToggle(item.id, !allChecked); }
+    });
+  };
+
+  // ── DEBOUNCED AUTO-SAVE (saves 1s after last toggle) ──
+  let saveTimer = null;
+  function debouncedSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => saveToFirebase(), 1000);
+  }
+
+  // ── SAVE TO FIREBASE ──
+  window.saveToFirebase = async function() {
+    setSaveStatus('saving');
+    try {
+      await set(ref(db, 'availability'), availability);
+      setSaveStatus('saved');
+      showToast('✅ Saved! Menu updated for all customers.');
+    } catch(e) {
+      setSaveStatus('error');
+      showToast('❌ Save failed. Check internet connection.');
+    }
+  };
+
+  function setSaveStatus(state) {
+    const dot  = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+    if (state === 'saving') { dot.className='dot saving'; text.textContent='Saving...'; }
+    else if (state === 'saved') { dot.className='dot'; dot.style.background='#4caf50'; text.textContent='Saved ✓'; }
+    else { dot.className='dot'; dot.style.background='#d32f2f'; text.textContent='Error'; }
+  }
+
+  // ── STATS ──
+  function updateStats() {
+    let total=0, unavail=0;
+    MENU.forEach(s => s.items.forEach(item => {
+      total++;
+      if (document.getElementById('chk-'+item.id) && !document.getElementById('chk-'+item.id).checked) unavail++;
+    }));
+    document.getElementById('statTotal').textContent  = total;
+    document.getElementById('statAvail').textContent  = total - unavail;
+    document.getElementById('statUnavail').textContent = unavail;
+  }
+
+  // ── RESET ──
+  window.showResetConfirm = () => document.getElementById('resetConfirm').classList.add('show');
+  window.hideResetConfirm = () => document.getElementById('resetConfirm').classList.remove('show');
+  window.resetAll = async function() {
+    availability = { __date: new Date().toDateString() };
+    await set(ref(db, 'availability'), availability);
+    hideResetConfirm();
+    renderMenu();
+    updateStats();
+    showToast('🔄 All items reset to Available');
+  };
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── MIDNIGHT RESET ──
+  function scheduleMidnightReset() {
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    setTimeout(async () => {
+      availability = { __date: new Date().toDateString() };
+      await set(ref(db, 'availability'), availability);
+      renderMenu();
+      updateStats();
+      showToast('🌅 New day! Menu reset to all Available.');
+      scheduleMidnightReset();
+    }, midnight - now);
+  }
+
+  // enter key on login
+  document.getElementById('passInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') window.doLogin();
+  });
 </script>
 </body>
 </html>
