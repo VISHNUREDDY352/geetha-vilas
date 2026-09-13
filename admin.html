@@ -151,7 +151,7 @@
       <button id="saveBtn" class="btn btn-gold">💾 Save</button>
       <button id="addItemBtn" class="btn btn-gold" style="background:#2e7d3f;">➕ Add Item</button>
       <button id="resetBtn" class="btn btn-outline">🔄 Reset All</button>
-      <button id="logoutBtn" class="btn btn-outline" style="padding:8px 12px;">🚪</button>
+      <button id="logoutBtn" class="btn btn-outline">🚪 Logout</button>
     </div>
   </header>
   <main>
@@ -307,13 +307,19 @@
     if (e.key === 'Enter') doLogin();
   });
 
+  function showAdmin() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('loadingOverlay').style.display = 'flex';
+    document.getElementById('adminScreen').style.display = 'block';
+    initAdmin();
+  }
+
   function doLogin() {
     const val = document.getElementById('passInput').value;
     if (val === ADMIN_PASS) {
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('loadingOverlay').style.display = 'flex';
-      document.getElementById('adminScreen').style.display = 'block';
-      initAdmin();
+      // remember login so refresh doesn't ask again
+      localStorage.setItem('gv_admin_loggedin', 'yes');
+      showAdmin();
     } else {
       document.getElementById('loginError').style.display = 'block';
       document.getElementById('passInput').value = '';
@@ -321,10 +327,17 @@
   }
 
   document.getElementById('logoutBtn').addEventListener('click', function() {
+    if (!confirm('Logout from admin?')) return;
+    localStorage.removeItem('gv_admin_loggedin');
     document.getElementById('adminScreen').style.display = 'none';
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('passInput').value = '';
   });
+
+  // auto-login if already logged in (survives refresh)
+  if (localStorage.getItem('gv_admin_loggedin') === 'yes') {
+    showAdmin();
+  }
 
   // ── SAVE / RESET BUTTONS ──
   document.getElementById('saveBtn').addEventListener('click', saveToFirebase);
