@@ -6,166 +6,78 @@
   <title>Geetha Vilas – Admin Panel</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --green: #1a5c2a;
-      --green-mid: #2e7d3f;
-      --gold: #c9a227;
-      --cream: #fffdf5;
-      --red: #d32f2f;
-      --red-light: #ffebee;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Poppins', sans-serif; background: #f0f4f0; min-height: 100vh; }
+    :root { --green:#1a5c2a; --green-mid:#2e7d3f; --gold:#c9a227; --cream:#fffdf5; --red:#d32f2f; --red-light:#ffebee; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:'Poppins',sans-serif; background:#f0f4f0; min-height:100vh; }
 
-    /* ── LOGIN ── */
-    #loginScreen {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center; padding: 20px;
-    }
-    .login-card {
-      background: var(--cream); border-radius: 20px; padding: 40px 36px;
-      max-width: 360px; width: 100%; text-align: center;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.13); border-top: 5px solid var(--gold);
-    }
-    .login-card h2 { font-family: 'Playfair Display', serif; color: var(--green); font-size: 26px; margin-bottom: 4px; }
-    .login-card p { font-size: 13px; color: #777; margin-bottom: 28px; }
-    .login-card input {
-      width: 100%; padding: 12px 16px; border-radius: 10px; border: 2px solid #ddd;
-      font-size: 18px; text-align: center; letter-spacing: 6px;
-      font-family: 'Poppins', sans-serif; margin-bottom: 14px; outline: none; transition: border .2s;
-    }
-    .login-card input:focus { border-color: var(--green); }
-    .login-card button {
-      width: 100%; padding: 13px; background: var(--green); color: #fff;
-      border: none; border-radius: 10px; font-size: 15px; font-weight: 600;
-      cursor: pointer; font-family: 'Poppins', sans-serif; transition: opacity .2s;
-    }
-    .login-card button:hover { opacity: .88; }
-    #loginError { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+    #loginScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
+    .login-card { background:var(--cream); border-radius:20px; padding:40px 36px; max-width:360px; width:100%; text-align:center; box-shadow:0 8px 40px rgba(0,0,0,0.13); border-top:5px solid var(--gold); }
+    .login-card h2 { font-family:'Playfair Display',serif; color:var(--green); font-size:26px; margin-bottom:4px; }
+    .login-card p { font-size:13px; color:#777; margin-bottom:28px; }
+    .login-card input { width:100%; padding:12px 16px; border-radius:10px; border:2px solid #ddd; font-size:18px; text-align:center; letter-spacing:6px; font-family:'Poppins',sans-serif; margin-bottom:14px; outline:none; transition:border .2s; }
+    .login-card input:focus { border-color:var(--green); }
+    .login-card button { width:100%; padding:13px; background:var(--green); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; font-family:'Poppins',sans-serif; }
+    #loginError { color:var(--red); font-size:13px; margin-top:10px; display:none; }
 
-    /* ── ADMIN ── */
-    #adminScreen { display: none; }
+    #adminScreen { display:none; }
+    header { background:linear-gradient(135deg,var(--green) 0%,var(--green-mid) 100%); color:#fff; padding:18px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; position:sticky; top:0; z-index:100; box-shadow:0 2px 12px rgba(0,0,0,0.2); }
+    .header-left h1 { font-family:'Playfair Display',serif; font-size:22px; }
+    .header-left p { font-size:12px; opacity:.8; margin-top:2px; }
+    .header-right { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .date-badge { background:rgba(255,255,255,0.18); border-radius:8px; padding:6px 14px; font-size:13px; font-weight:600; }
+    .btn { padding:8px 18px; border-radius:8px; font-size:13px; font-weight:600; cursor:pointer; border:none; font-family:'Poppins',sans-serif; transition:opacity .2s; }
+    .btn:hover { opacity:.88; }
+    .btn-gold { background:var(--gold); color:#fff; }
+    .btn-outline { background:transparent; color:#fff; border:2px solid rgba(255,255,255,0.6); }
+    .btn-red { background:var(--red); color:#fff; }
 
-    header {
-      background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
-      color: #fff; padding: 18px 20px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 10px;
-      position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-    }
-    .header-left h1 { font-family: 'Playfair Display', serif; font-size: 22px; }
-    .header-left p { font-size: 12px; opacity: .8; margin-top: 2px; }
-    .header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .date-badge { background: rgba(255,255,255,0.18); border-radius: 8px; padding: 6px 14px; font-size: 13px; font-weight: 600; }
-
-    .btn {
-      padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600;
-      cursor: pointer; border: none; font-family: 'Poppins', sans-serif;
-      transition: opacity .2s, transform .15s;
-    }
-    .btn:hover { opacity: .88; transform: translateY(-1px); }
-    .btn-gold { background: var(--gold); color: #fff; }
-    .btn-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.6); }
-    .btn-red { background: var(--red); color: #fff; }
-
-    /* saving indicator */
-    #saveStatus {
-      font-size: 12px; color: rgba(255,255,255,0.8);
-      display: flex; align-items: center; gap: 6px;
-    }
-    .dot { width: 8px; height: 8px; border-radius: 50%; background: #4caf50; }
-    .dot.saving { background: var(--gold); animation: pulse .8s infinite; }
+    #saveStatus { font-size:12px; color:rgba(255,255,255,0.9); display:flex; align-items:center; gap:6px; }
+    .dot { width:8px; height:8px; border-radius:50%; background:#4caf50; flex-shrink:0; }
+    .dot.saving { background:var(--gold); animation:pulse .8s infinite; }
+    .dot.error { background:var(--red); }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
-    main { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+    main { max-width:900px; margin:0 auto; padding:20px 16px 60px; }
+    .stats-bar { display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
+    .stat-box { background:#fff; border-radius:10px; padding:12px 20px; flex:1; min-width:100px; text-align:center; border:1px solid #e0e8e0; }
+    .stat-num { font-size:26px; font-weight:700; color:var(--green); }
+    .stat-num.red { color:var(--red); }
+    .stat-label { font-size:11px; color:#777; margin-top:2px; }
 
-    .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
-    .stat-box {
-      background: #fff; border-radius: 10px; padding: 12px 20px;
-      flex: 1; min-width: 120px; text-align: center; border: 1px solid #e0e8e0;
-    }
-    .stat-num { font-size: 26px; font-weight: 700; color: var(--green); }
-    .stat-num.red { color: var(--red); }
-    .stat-label { font-size: 11px; color: #777; margin-top: 2px; }
+    .section { background:#fff; border-radius:14px; margin-bottom:16px; overflow:hidden; border:1px solid #e0e8e0; }
+    .section-head { background:var(--green); color:#fff; padding:12px 18px; display:flex; align-items:center; justify-content:space-between; }
+    .section-head-left { display:flex; align-items:center; gap:10px; font-weight:600; font-size:15px; }
+    .toggle-all-btn { font-size:11px; padding:4px 12px; border-radius:6px; background:rgba(255,255,255,0.2); color:#fff; border:1px solid rgba(255,255,255,0.4); cursor:pointer; font-family:'Poppins',sans-serif; font-weight:500; }
 
-    .section { background: #fff; border-radius: 14px; margin-bottom: 16px; overflow: hidden; border: 1px solid #e0e8e0; }
-    .section-head {
-      background: var(--green); color: #fff; padding: 12px 18px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .section-head-left { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
-    .toggle-all-btn {
-      font-size: 11px; padding: 4px 12px; border-radius: 6px;
-      background: rgba(255,255,255,0.2); color: #fff;
-      border: 1px solid rgba(255,255,255,0.4); cursor: pointer;
-      font-family: 'Poppins', sans-serif; font-weight: 500;
-    }
-    .toggle-all-btn:hover { background: rgba(255,255,255,0.35); }
+    .item-row { display:flex; align-items:center; justify-content:space-between; padding:10px 18px; border-bottom:1px solid #f0f4f0; transition:background .15s; }
+    .item-row:last-child { border-bottom:none; }
+    .item-row:hover { background:#f9fbf9; }
+    .item-row.unavailable { background:var(--red-light); }
+    .item-info .name { font-size:14px; font-weight:500; }
+    .item-info .price { font-size:12px; color:#888; margin-top:1px; }
+    .item-row.unavailable .name { text-decoration:line-through; color:#aaa; }
 
-    .item-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 18px; border-bottom: 1px solid #f0f4f0; transition: background .15s;
-    }
-    .item-row:last-child { border-bottom: none; }
-    .item-row:hover { background: #f9fbf9; }
-    .item-row.unavailable { background: var(--red-light); }
-    .item-row.unavailable:hover { background: #ffdde0; }
-    .item-info .name { font-size: 14px; font-weight: 500; color: #1a1a1a; }
-    .item-info .price { font-size: 12px; color: #888; margin-top: 1px; }
-    .item-row.unavailable .name { text-decoration: line-through; color: #aaa; }
+    .switch { position:relative; display:inline-block; width:50px; height:26px; flex-shrink:0; }
+    .switch input { opacity:0; width:0; height:0; }
+    .slider { position:absolute; cursor:pointer; inset:0; background:#ccc; border-radius:26px; transition:.3s; }
+    .slider:before { content:''; position:absolute; height:20px; width:20px; left:3px; bottom:3px; background:#fff; border-radius:50%; transition:.3s; box-shadow:0 1px 4px rgba(0,0,0,0.2); }
+    input:checked + .slider { background:var(--green-mid); }
+    input:checked + .slider:before { transform:translateX(24px); }
 
-    /* toggle switch */
-    .switch { position: relative; display: inline-block; width: 50px; height: 26px; flex-shrink: 0; }
-    .switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; inset: 0; background: #ccc; border-radius: 26px; transition: .3s; }
-    .slider:before {
-      content: ''; position: absolute; height: 20px; width: 20px;
-      left: 3px; bottom: 3px; background: #fff; border-radius: 50%;
-      transition: .3s; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    }
-    input:checked + .slider { background: var(--green-mid); }
-    input:checked + .slider:before { transform: translateX(24px); }
+    #toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--green); color:#fff; padding:12px 28px; border-radius:30px; font-size:14px; font-weight:600; box-shadow:0 4px 20px rgba(0,0,0,0.2); transition:transform .3s; z-index:999; white-space:nowrap; }
+    #toast.show { transform:translateX(-50%) translateY(0); }
+    #toast.error-toast { background:var(--red); }
 
-    /* toast */
-    #toast {
-      position: fixed; bottom: 30px; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--green); color: #fff; padding: 12px 28px;
-      border-radius: 30px; font-size: 14px; font-weight: 600;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2); transition: transform .3s ease;
-      z-index: 999; white-space: nowrap;
-    }
-    #toast.show { transform: translateX(-50%) translateY(0); }
+    #resetConfirm { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:500; align-items:center; justify-content:center; padding:20px; }
+    #resetConfirm.show { display:flex; }
+    .confirm-box { background:#fff; border-radius:16px; padding:28px 30px; max-width:340px; width:100%; text-align:center; }
+    .confirm-box h3 { color:var(--red); font-size:18px; margin-bottom:10px; }
+    .confirm-box p { font-size:13px; color:#555; margin-bottom:20px; }
+    .confirm-row { display:flex; gap:10px; justify-content:center; }
 
-    /* reset confirm */
-    #resetConfirm {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.5); z-index: 500;
-      align-items: center; justify-content: center; padding: 20px;
-    }
-    #resetConfirm.show { display: flex; }
-    .confirm-box {
-      background: #fff; border-radius: 16px; padding: 28px 30px;
-      max-width: 340px; width: 100%; text-align: center;
-    }
-    .confirm-box h3 { color: var(--red); font-size: 18px; margin-bottom: 10px; }
-    .confirm-box p { font-size: 13px; color: #555; margin-bottom: 20px; }
-    .confirm-box .btn-row { display: flex; gap: 10px; justify-content: center; }
-
-    /* loading overlay */
-    #loadingOverlay {
-      position: fixed; inset: 0; background: rgba(255,255,255,0.9);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      z-index: 999; gap: 16px;
-    }
-    .spinner {
-      width: 40px; height: 40px; border: 4px solid #e0e8e0;
-      border-top-color: var(--green); border-radius: 50%; animation: spin .8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 480px) { .stats-bar { flex-direction: row; } .stat-box { min-width: 80px; } }
+    #loadingOverlay { position:fixed; inset:0; background:rgba(255,255,255,0.92); display:none; flex-direction:column; align-items:center; justify-content:center; z-index:999; gap:16px; }
+    .spinner { width:40px; height:40px; border:4px solid #e0e8e0; border-top-color:var(--green); border-radius:50%; animation:spin .8s linear infinite; }
+    @keyframes spin { to{transform:rotate(360deg)} }
   </style>
 </head>
 <body>
@@ -176,15 +88,14 @@
     <div style="font-size:40px;margin-bottom:12px;">🔐</div>
     <h2>Admin Login</h2>
     <p>Geetha Vilas – Menu Management</p>
-    <input type="password" id="passInput" placeholder="••••" maxlength="10"
-      onkeydown="if(event.key==='Enter') doLogin()" />
-    <button onclick="doLogin()">Login</button>
+    <input type="password" id="passInput" placeholder="••••" maxlength="10" />
+    <button id="loginBtn">Login</button>
     <div id="loginError">❌ Wrong password. Try again.</div>
   </div>
 </div>
 
 <!-- LOADING -->
-<div id="loadingOverlay" style="display:none;">
+<div id="loadingOverlay">
   <div class="spinner"></div>
   <div style="font-size:14px;color:#555;">Loading menu data...</div>
 </div>
@@ -199,12 +110,11 @@
     <div class="header-right">
       <div id="saveStatus"><div class="dot" id="statusDot"></div><span id="statusText">Saved</span></div>
       <div class="date-badge" id="todayDate"></div>
-      <button class="btn btn-gold" onclick="saveToFirebase()">💾 Save</button>
-      <button class="btn btn-outline" onclick="showResetConfirm()">🔄 Reset All</button>
-      <button class="btn btn-outline" onclick="logout()" style="padding:8px 12px;">🚪</button>
+      <button id="saveBtn" class="btn btn-gold">💾 Save</button>
+      <button id="resetBtn" class="btn btn-outline">🔄 Reset All</button>
+      <button id="logoutBtn" class="btn btn-outline" style="padding:8px 12px;">🚪</button>
     </div>
   </header>
-
   <main>
     <div class="stats-bar">
       <div class="stat-box"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Items</div></div>
@@ -220,20 +130,21 @@
 <div id="resetConfirm">
   <div class="confirm-box">
     <h3>Reset All Items?</h3>
-    <p>All items will be marked <strong>Available</strong>. This also happens automatically every day at midnight.</p>
-    <div class="btn-row">
-      <button class="btn btn-red" onclick="resetAll()">Yes, Reset</button>
-      <button class="btn" style="background:#eee;color:#333;" onclick="hideResetConfirm()">Cancel</button>
+    <p>All items will be marked <strong>Available</strong>. Happens automatically every midnight too.</p>
+    <div class="confirm-row">
+      <button id="confirmResetBtn" class="btn btn-red">Yes, Reset</button>
+      <button id="cancelResetBtn" class="btn" style="background:#eee;color:#333;">Cancel</button>
     </div>
   </div>
 </div>
 
-<!-- Firebase -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+<!-- Firebase SDK (compat version — no module needed, works with all browsers) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-  const firebaseConfig = {
+<script>
+  // ── FIREBASE INIT ──
+  firebase.initializeApp({
     apiKey: "AIzaSyBTUE_S2F61B7NouDQ81lj_i6fEeKyAag0",
     authDomain: "getha-qr.firebaseapp.com",
     databaseURL: "https://getha-qr-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -241,10 +152,8 @@
     storageBucket: "getha-qr.firebasestorage.app",
     messagingSenderId: "254549576707",
     appId: "1:254549576707:web:cb4643363afe007e675236"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db  = getDatabase(app);
+  });
+  const db = firebase.database();
 
   // ── MENU DATA ──
   const MENU = [
@@ -331,7 +240,12 @@
   let availability = {};
 
   // ── LOGIN ──
-  window.doLogin = function() {
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+  document.getElementById('passInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  function doLogin() {
     const val = document.getElementById('passInput').value;
     if (val === ADMIN_PASS) {
       document.getElementById('loginScreen').style.display = 'none';
@@ -342,152 +256,174 @@
       document.getElementById('loginError').style.display = 'block';
       document.getElementById('passInput').value = '';
     }
-  };
+  }
 
-  window.logout = function() {
+  document.getElementById('logoutBtn').addEventListener('click', function() {
     document.getElementById('adminScreen').style.display = 'none';
     document.getElementById('loginScreen').style.display = 'flex';
     document.getElementById('passInput').value = '';
-  };
+  });
+
+  // ── SAVE / RESET BUTTONS ──
+  document.getElementById('saveBtn').addEventListener('click', saveToFirebase);
+  document.getElementById('resetBtn').addEventListener('click', function() {
+    document.getElementById('resetConfirm').classList.add('show');
+  });
+  document.getElementById('cancelResetBtn').addEventListener('click', function() {
+    document.getElementById('resetConfirm').classList.remove('show');
+  });
+  document.getElementById('confirmResetBtn').addEventListener('click', resetAll);
 
   // ── INIT ──
-  async function initAdmin() {
-    // Date
+  function initAdmin() {
     const now = new Date();
     document.getElementById('todayDate').textContent =
       now.toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
 
-    // Load from Firebase
-    try {
-      const snap = await get(ref(db, 'availability'));
+    db.ref('availability').once('value').then(function(snap) {
       const data = snap.val() || {};
-
-      // Daily reset check
       const today = now.toDateString();
       if (data.__date !== today) {
         availability = { __date: today };
+        // auto-reset for new day
+        db.ref('availability').set(availability);
       } else {
         availability = data;
       }
-    } catch(e) {
-      availability = { __date: now.toDateString() };
-    }
-
-    document.getElementById('loadingOverlay').style.display = 'none';
-    renderMenu();
-    updateStats();
-    scheduleMidnightReset();
+      document.getElementById('loadingOverlay').style.display = 'none';
+      renderMenu();
+      updateStats();
+      scheduleMidnightReset();
+    }).catch(function(err) {
+      console.error('Firebase read error:', err);
+      availability = { __date: new Date().toDateString() };
+      document.getElementById('loadingOverlay').style.display = 'none';
+      renderMenu();
+      updateStats();
+      showToast('⚠️ Could not load data. Check connection.', true);
+    });
   }
 
   // ── RENDER ──
   function renderMenu() {
     const container = document.getElementById('menuContainer');
     container.innerHTML = '';
-    MENU.forEach(section => {
+    MENU.forEach(function(section) {
       const div = document.createElement('div');
       div.className = 'section';
-      div.innerHTML = `
-        <div class="section-head">
-          <div class="section-head-left">${section.icon} ${section.title}</div>
-          <button class="toggle-all-btn" onclick="toggleSection('${section.id}')">Toggle All</button>
-        </div>
-        <div class="section-body">
-          ${section.items.map(item => {
-            const isAvail = availability[item.id] !== false;
-            return `
-              <div class="item-row ${isAvail?'':'unavailable'}" id="row-${item.id}">
-                <div class="item-info">
-                  <div class="name">${item.name}</div>
-                  <div class="price">₹${item.price}</div>
-                </div>
-                <label class="switch">
-                  <input type="checkbox" id="chk-${item.id}" ${isAvail?'checked':''}
-                    onchange="onToggle('${item.id}', this.checked)" />
-                  <span class="slider"></span>
-                </label>
-              </div>`;
-          }).join('')}
-        </div>`;
+
+      const head = document.createElement('div');
+      head.className = 'section-head';
+      head.innerHTML = '<div class="section-head-left">' + section.icon + ' ' + section.title + '</div>';
+      const toggleBtn = document.createElement('button');
+      toggleBtn.className = 'toggle-all-btn';
+      toggleBtn.textContent = 'Toggle All';
+      toggleBtn.addEventListener('click', function() { toggleSection(section.id); });
+      head.appendChild(toggleBtn);
+      div.appendChild(head);
+
+      const body = document.createElement('div');
+      section.items.forEach(function(item) {
+        const isAvail = availability[item.id] !== false;
+        const row = document.createElement('div');
+        row.className = 'item-row' + (isAvail ? '' : ' unavailable');
+        row.id = 'row-' + item.id;
+        row.innerHTML =
+          '<div class="item-info"><div class="name">' + item.name + '</div><div class="price">₹' + item.price + '</div></div>' +
+          '<label class="switch"><input type="checkbox" id="chk-' + item.id + '"' + (isAvail ? ' checked' : '') + '><span class="slider"></span></label>';
+        body.appendChild(row);
+
+        // attach change listener
+        row.querySelector('input').addEventListener('change', function() {
+          onToggle(item.id, this.checked);
+        });
+      });
+      div.appendChild(body);
       container.appendChild(div);
     });
   }
 
-  window.onToggle = function(itemId, checked) {
+  function onToggle(itemId, checked) {
     const row = document.getElementById('row-' + itemId);
-    checked ? row.classList.remove('unavailable') : row.classList.add('unavailable');
+    if (checked) row.classList.remove('unavailable');
+    else row.classList.add('unavailable');
     availability[itemId] = checked;
     updateStats();
     setSaveStatus('saving');
     debouncedSave();
-  };
+  }
 
-  window.toggleSection = function(sectionId) {
-    const section = MENU.find(s => s.id === sectionId);
-    const allChecked = section.items.every(item => document.getElementById('chk-' + item.id)?.checked);
-    section.items.forEach(item => {
+  function toggleSection(sectionId) {
+    const section = MENU.find(function(s) { return s.id === sectionId; });
+    const allChecked = section.items.every(function(item) {
       const chk = document.getElementById('chk-' + item.id);
-      if (chk) { chk.checked = !allChecked; window.onToggle(item.id, !allChecked); }
+      return chk && chk.checked;
     });
-  };
+    section.items.forEach(function(item) {
+      const chk = document.getElementById('chk-' + item.id);
+      if (chk) { chk.checked = !allChecked; onToggle(item.id, !allChecked); }
+    });
+  }
 
-  // ── DEBOUNCED AUTO-SAVE (saves 1s after last toggle) ──
+  // ── DEBOUNCED SAVE ──
   let saveTimer = null;
   function debouncedSave() {
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => saveToFirebase(), 1000);
+    saveTimer = setTimeout(saveToFirebase, 1500);
   }
 
-  // ── SAVE TO FIREBASE ──
-  window.saveToFirebase = async function() {
+  // ── SAVE ──
+  function saveToFirebase() {
     setSaveStatus('saving');
-    try {
-      await set(ref(db, 'availability'), availability);
+    db.ref('availability').set(availability).then(function() {
       setSaveStatus('saved');
       showToast('✅ Saved! Menu updated for all customers.');
-    } catch(e) {
+    }).catch(function(err) {
       setSaveStatus('error');
-      showToast('❌ Save failed. Check internet connection.');
-    }
-  };
+      showToast('❌ Save failed: ' + err.message, true);
+    });
+  }
 
   function setSaveStatus(state) {
     const dot  = document.getElementById('statusDot');
     const text = document.getElementById('statusText');
-    if (state === 'saving') { dot.className='dot saving'; text.textContent='Saving...'; }
-    else if (state === 'saved') { dot.className='dot'; dot.style.background='#4caf50'; text.textContent='Saved ✓'; }
-    else { dot.className='dot'; dot.style.background='#d32f2f'; text.textContent='Error'; }
+    dot.className = 'dot' + (state === 'saving' ? ' saving' : state === 'error' ? ' error' : '');
+    dot.style.background = state === 'saved' ? '#4caf50' : '';
+    text.textContent = state === 'saving' ? 'Saving...' : state === 'error' ? 'Error ✗' : 'Saved ✓';
   }
 
   // ── STATS ──
   function updateStats() {
-    let total=0, unavail=0;
-    MENU.forEach(s => s.items.forEach(item => {
-      total++;
-      if (document.getElementById('chk-'+item.id) && !document.getElementById('chk-'+item.id).checked) unavail++;
-    }));
-    document.getElementById('statTotal').textContent  = total;
-    document.getElementById('statAvail').textContent  = total - unavail;
+    let total = 0, unavail = 0;
+    MENU.forEach(function(s) {
+      s.items.forEach(function(item) {
+        total++;
+        const chk = document.getElementById('chk-' + item.id);
+        if (chk && !chk.checked) unavail++;
+      });
+    });
+    document.getElementById('statTotal').textContent   = total;
+    document.getElementById('statAvail').textContent   = total - unavail;
     document.getElementById('statUnavail').textContent = unavail;
   }
 
   // ── RESET ──
-  window.showResetConfirm = () => document.getElementById('resetConfirm').classList.add('show');
-  window.hideResetConfirm = () => document.getElementById('resetConfirm').classList.remove('show');
-  window.resetAll = async function() {
+  function resetAll() {
     availability = { __date: new Date().toDateString() };
-    await set(ref(db, 'availability'), availability);
-    hideResetConfirm();
-    renderMenu();
-    updateStats();
-    showToast('🔄 All items reset to Available');
-  };
+    db.ref('availability').set(availability).then(function() {
+      document.getElementById('resetConfirm').classList.remove('show');
+      renderMenu();
+      updateStats();
+      showToast('🔄 All items reset to Available');
+    });
+  }
 
   // ── TOAST ──
-  function showToast(msg) {
+  function showToast(msg, isError) {
     const t = document.getElementById('toast');
     t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    t.className = isError ? 'error-toast show' : 'show';
+    setTimeout(function() { t.className = ''; }, 3000);
   }
 
   // ── MIDNIGHT RESET ──
@@ -495,20 +431,16 @@
     const now = new Date();
     const midnight = new Date(now);
     midnight.setHours(24, 0, 0, 0);
-    setTimeout(async () => {
+    setTimeout(function() {
       availability = { __date: new Date().toDateString() };
-      await set(ref(db, 'availability'), availability);
-      renderMenu();
-      updateStats();
-      showToast('🌅 New day! Menu reset to all Available.');
-      scheduleMidnightReset();
+      db.ref('availability').set(availability).then(function() {
+        renderMenu();
+        updateStats();
+        showToast('🌅 New day! Menu reset to all Available.');
+        scheduleMidnightReset();
+      });
     }, midnight - now);
   }
-
-  // enter key on login
-  document.getElementById('passInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') window.doLogin();
-  });
 </script>
 </body>
 </html>
