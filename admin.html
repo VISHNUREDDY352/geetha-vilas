@@ -356,6 +356,7 @@
       document.getElementById('loadingOverlay').style.display = 'none';
       renderMenu();
       updateStats();
+      startTimingScheduler();
       scheduleMidnightReset();
     }).catch(function(err) {
       console.error('Firebase read error:', err);
@@ -433,6 +434,7 @@
     if (checked) row.classList.remove('unavailable');
     else row.classList.add('unavailable');
     availability[itemId] = checked;
+    availability['__manual_' + itemId] = true; // mark as manually set
     updateStats();
     setSaveStatus('saving');
     debouncedSave();
@@ -606,17 +608,75 @@
     });
   }
 
+  // ── SECTION TIMINGS ──
+  // format: { sectionId: { start: [H, M], end: [H, M] } }
+  // null means always available
+  const SECTION_TIMINGS = {
+    'breakfast':   { start: [6,  0], end: [23, 0] },
+    'dosas':       { start: [15, 0], end: [23, 0] },
+    'tiffins':     { start: [15, 0], end: [23, 0] },
+    'starters':    { start: [15, 0], end: [23, 0] },
+    'rice-noodles':{ start: [15, 0], end: [23, 0] },
+    'lunch':       null,
+    'milkshakes':  null,
+    'mojitos':     null,
+    'juices':      null,
+    'falooda':     null
+  };
+
+  // Returns true if a section should be available right now based on its timing
+  function isSectionActiveNow(sectionId) {
+    var timing = SECTION_TIMINGS[sectionId];
+    if (!timing) return true; // no timing = always on
+    var now = new Date();
+    var cur = now.getHours() * 60 + now.getMinutes();
+    var start = timing.start[0] * 60 + timing.start[1];
+    var end   = timing.end[0]   * 60 + timing.end[1];
+    return cur >= start && cur < end;
+  }
+
+  // Apply timing-based availability to all sections (only for items not manually set)
+  function applyTimingSchedule() {
+    var changed = false;
+    MENU.forEach(function(section) {
+      var active = isSectionActiveNow(section.id);
+      section.items.forEach(function(item) {
+        // only auto-control if item hasn't been manually overridden today
+        if (availability['__manual_' + item.id] !== true) {
+          var cur = availability[item.id] !== false;
+          if (cur !== active) {
+            availability[item.id] = active;
+            changed = true;
+          }
+        }
+      });
+    });
+    if (changed) {
+      db.ref('availability').set(availability);
+      renderMenu();
+      updateStats();
+    }
+  }
+
+  // Schedule next timing trigger (runs every minute to check)
+  function startTimingScheduler() {
+    applyTimingSchedule(); // run immediately on load
+    setInterval(applyTimingSchedule, 60 * 1000); // check every minute
+  }
+
   // ── MIDNIGHT RESET ──
   function scheduleMidnightReset() {
     const now = new Date();
     const midnight = new Date(now);
     midnight.setHours(24, 0, 0, 0);
     setTimeout(function() {
+      // clear manual overrides and availability, let timing scheduler take over
       availability = { __date: new Date().toDateString() };
       db.ref('availability').set(availability).then(function() {
+        applyTimingSchedule();
         renderMenu();
         updateStats();
-        showToast('🌅 New day! Menu reset to all Available.');
+        showToast('🌅 New day! Menu schedule active.');
         scheduleMidnightReset();
       });
     }, midnight - now);

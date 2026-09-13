@@ -69,6 +69,16 @@
       font-size:11px; font-weight:600; padding:3px 10px; border-radius:12px;
       border:1px solid var(--gold); margin-left:auto;
     }
+    .timing-badge.timing-closed {
+      background:#ffebee; color:var(--red); border-color:#ffcdd2;
+    }
+    .section-closed { opacity:.6; }
+    .section-closed .items-grid { pointer-events:none; filter:grayscale(.5); }
+    .closed-banner {
+      background:#fff3e0; border:1px solid #ffe0b2; border-radius:8px;
+      padding:8px 14px; font-size:12px; color:#e65100; font-weight:600;
+      margin-bottom:12px;
+    }
 
     /* ── GRID ── */
     .items-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:10px; }
@@ -269,14 +279,33 @@
     ]}
   ];
 
+  // ── SECTION TIMINGS (same as admin) ──
+  var SECTION_TIMINGS = {
+    'breakfast':   { start: [6,  0], end: [23, 0], label: '6:00 AM – 11:00 PM' },
+    'dosas':       { start: [15, 0], end: [23, 0], label: '3:00 PM – 11:00 PM' },
+    'tiffins':     { start: [15, 0], end: [23, 0], label: '3:00 PM – 11:00 PM' },
+    'starters':    { start: [15, 0], end: [23, 0], label: '3:00 PM – 11:00 PM' },
+    'rice-noodles':{ start: [15, 0], end: [23, 0], label: '3:00 PM – 11:00 PM' }
+  };
+
+  function isSectionActiveNow(sectionId) {
+    var t = SECTION_TIMINGS[sectionId];
+    if (!t) return true;
+    var now = new Date();
+    var cur = now.getHours() * 60 + now.getMinutes();
+    return cur >= (t.start[0]*60+t.start[1]) && cur < (t.end[0]*60+t.end[1]);
+  }
+
   // ── RENDER MENU ──
   function renderMenu(availability) {
     const main = document.getElementById('menuMain');
     main.innerHTML = '';
 
     MENU.forEach(section => {
+      const isActive = isSectionActiveNow(section.id);
+      const timing = SECTION_TIMINGS[section.id];
       const sec = document.createElement('section');
-      sec.className = 'menu-section';
+      sec.className = 'menu-section' + (isActive ? '' : ' section-closed');
       sec.id = section.id;
       sec.innerHTML = `
         <div class="section-header">
@@ -285,7 +314,9 @@
             <div class="section-title">${section.title}</div>
             ${section.sub ? `<div class="section-sub">${section.sub}</div>` : ''}
           </div>
-          ${section.timing ? `<span class="timing-badge">${section.timing}</span>` : ''}
+          ${timing ? `<span class="timing-badge ${isActive ? '' : 'timing-closed'}">${timing.label}</span>` : ''}
+        </div>
+        ${!isActive ? `<div class="closed-banner">🕐 Available from ${timing.start[0] >= 12 ? timing.start[0]-12 || 12 : timing.start[0]}:${String(timing.start[1]).padStart(2,'0')} ${timing.start[0] >= 12 ? 'PM' : 'AM'}</div>` : ''}
         </div>
         <div class="items-grid">
           ${section.items.map(item => {
