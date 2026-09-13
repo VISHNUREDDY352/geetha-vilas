@@ -333,6 +333,16 @@
       const customItems = snap.val();
       if (customItems) loadCustomItems(Object.values(customItems).filter(Boolean));
 
+      return db.ref('removedItems').once('value');
+    }).then(function(snap) {
+      // filter out permanently removed original items
+      const removed = snap.val() || {};
+      Object.keys(removed).forEach(function(itemId) {
+        MENU.forEach(function(s) {
+          s.items = s.items.filter(function(i) { return i.id !== itemId; });
+        });
+      });
+
       return db.ref('availability').once('value');
     }).then(function(snap) {
       const data = snap.val() || {};
@@ -406,17 +416,15 @@
       '<div class="item-info"><div class="name">' + item.name + '</div><div class="price">₹' + item.price + '</div></div>' +
       '<div class="item-row-actions">' +
         '<label class="switch"><input type="checkbox" id="chk-' + item.id + '"' + (isAvail ? ' checked' : '') + '><span class="slider"></span></label>' +
-        (item.custom ? '<button class="del-btn" title="Delete item">🗑</button>' : '') +
+        '<button class="del-btn" title="Remove item">🗑</button>' +
       '</div>';
 
     row.querySelector('input').addEventListener('change', function() {
       onToggle(item.id, this.checked);
     });
-    if (item.custom) {
-      row.querySelector('.del-btn').addEventListener('click', function() {
-        deleteItem(item.id, sectionId);
-      });
-    }
+    row.querySelector('.del-btn').addEventListener('click', function() {
+      deleteItem(item.id, sectionId, item.custom);
+    });
     return row;
   }
 
@@ -555,9 +563,10 @@
   });
 
   // ── DELETE ITEM ──
-  function deleteItem(itemId, sectionId) {
-    if (!confirm('Delete this item permanently?')) return;
+  function deleteItem(itemId, sectionId, isCustom) {
+    if (!confirm('Remove "' + itemId + '" permanently from menu?')) return;
     const section = MENU.find(function(s) { return s.id === sectionId; });
+    const item = section.items.find(function(i) { return i.id === itemId; });
     section.items = section.items.filter(function(i) { return i.id !== itemId; });
     delete availability[itemId];
 
@@ -565,10 +574,15 @@
     const row = document.getElementById('row-' + itemId);
     if (row) row.remove();
 
+    // for original items, save to removedItems in Firebase so they stay removed
+    if (!isCustom) {
+      db.ref('removedItems/' + itemId).set({ sectionId: sectionId, name: item ? item.name : itemId });
+    }
+
     saveCustomItems();
     saveToFirebase();
     updateStats();
-    showToast('🗑 Item deleted.');
+    showToast('🗑 Item removed from menu.');
   }
 
   // ── SAVE / LOAD CUSTOM ITEMS ──

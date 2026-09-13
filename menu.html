@@ -325,6 +325,15 @@
       });
     }
 
+    return db.ref('removedItems').once('value');
+  }).then(function(snap) {
+    var removed = snap.val() || {};
+    Object.keys(removed).forEach(function(itemId) {
+      MENU.forEach(function(s) {
+        s.items = s.items.filter(function(i) { return i.id !== itemId; });
+      });
+    });
+
     db.ref('availability').on('value', function(snapshot) {
       bar.style.width = '100%';
       setTimeout(function() { bar.style.width = '0%'; }, 400);
